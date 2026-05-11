@@ -1,0 +1,23 @@
+[Unit]
+Description=fyers_algo Next.js dashboard (production server)
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=algo
+Group=algo
+WorkingDirectory=/home/algo/fyers_algo/next_frontend
+Environment=NODE_ENV=production
+Environment=PORT=3000
+# `npm run start` -> `next start` — serves the pre-built .next/ output.
+ExecStart=/usr/bin/npm run start
+Restart=always
+RestartSec=5
+StandardOutput=journal
+StandardError=journal
+NoNewPrivileges=true
+PrivateTmp=true
+
+[Install]
+WantedBy=multi-user.target

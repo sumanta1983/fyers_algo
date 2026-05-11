@@ -1,0 +1,23 @@
+[Unit]
+Description=fyers_algo Node backend (Fastify + Fyers WS + 1-min aggregator)
+After=network-online.target postgresql.service redis-server.service
+Wants=network-online.target
+# Crash-loop until first Fyers token exists in Redis — that's expected on cold boot.
+
+[Service]
+Type=simple
+User=algo
+Group=algo
+WorkingDirectory=/home/algo/fyers_algo/node_backend
+EnvironmentFile=/home/algo/fyers_algo/.env
+ExecStart=/usr/bin/node src/index.js
+Restart=always
+RestartSec=5
+StandardOutput=journal
+StandardError=journal
+# Modest hardening
+NoNewPrivileges=true
+PrivateTmp=true
+
+[Install]
+WantedBy=multi-user.target

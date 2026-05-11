@@ -169,8 +169,13 @@ When you add a new strategy to `python_engine/engine/strategies/registry.py`, al
 - [x] **M4 — 1-min aggregation → Postgres.** OHLCV roll-up + `candle.closed` pub + historical backfill on boot.
 - [x] **M5 — Python strategy engine.** Strategy ABC + `ema_crossover` + signal publisher.
 - [x] **M6 — Signal API + dashboard WS.** Fastify HTTP (`/signals`, `/strategies`) + `/ws/signals` Redis bridge.
-- [ ] **M7 — Next.js dashboard.**
+- [x] **M7 — Next.js dashboard (lean).** Signals feed + recent-history table + strategy switcher. (LTP grid + watchlist editor deferred to M7b.)
 - [ ] **M8 — Backtest CLI.**
+
+## Cloud deployment
+
+See [deploy/README.md](deploy/README.md) for the DigitalOcean single-VM runbook
+(systemd units, Caddy reverse proxy with TLS + basic auth, daily token ritual).
 
 ## Conventions
 

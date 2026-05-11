@@ -1,0 +1,21 @@
+[Unit]
+Description=fyers_algo Python strategy engine
+After=network-online.target postgresql.service redis-server.service fyers-node.service
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=algo
+Group=algo
+WorkingDirectory=/home/algo/fyers_algo/python_engine
+EnvironmentFile=/home/algo/fyers_algo/.env
+ExecStart=/home/algo/fyers_algo/.venv/bin/python -m engine.main
+Restart=always
+RestartSec=5
+StandardOutput=journal
+StandardError=journal
+NoNewPrivileges=true
+PrivateTmp=true
+
+[Install]
+WantedBy=multi-user.target
