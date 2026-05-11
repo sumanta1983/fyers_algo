@@ -1,0 +1,145 @@
+# Market Data Symbol Update
+The WebSocket API for receiving stock data is a real-time communication protocol designed to provide seamless and low-latency access to live stock market data. This API allows developers and traders to establish a persistent, bidirectional connection with the server, enabling them to receive continuous updates on stock prices, trading volumes, and other relevant market information.
+
+To quickly get started with the WebSocket API and start receiving real-time stock data, you can explore our sample scripts and code examples in our GitHub repository:
+Data WebSocket Sample Scripts
+
+# Node Script
+--------------
+
+const FyersSocket = require("fyers-api-v3").fyersDataSocket
+
+var fyersdata= new FyersSocket("xxxxx-1xx:ey....")
+
+function onmsg(message){
+    console.log(message)
+}
+
+function onconnect(){
+    fyersdata.subscribe(['NSE:TCS-EQ']) //not subscribing for market depth data
+    // fyersdata.mode(fyersdata.LiteMode) //set data mode to lite mode
+    // fyersdata.mode(fyersdata.FullMode) //set data mode to full mode is on full mode by default
+    fyersdata.autoreconnect() //enable auto reconnection mechanism in case of disconnection
+}
+
+function onerror(err){
+    console.log(err)
+}
+
+function onclose(){
+    console.log("socket closed")
+}
+
+fyersdata.on("message",onmsg)
+fyersdata.on("connect",onconnect)
+fyersdata.on("error",onerror)
+fyersdata.on("close",onclose)
+
+fyersdata.connect()
+
+------------------------------------------------------------------------------------------------------------------------------------------
+Sample Success Response 
+------------------------------------------------------------------------------------------------------------------------------------------
+          
+  {
+    symbol: 'NSE:TCS-EQ',
+    ltp: 3452.05,
+    vol_traded_today: 1956167,
+    last_traded_time: 1690885691,
+    exch_feed_time: 1690885758,
+    bid_size: 0,
+    ask_size: 313,
+    bid_price: 0,
+    ask_price: 3452.05,
+    last_traded_qty: 3,
+    tot_buy_qty: 0,
+    tot_sell_qty: 313,
+    avg_trade_price: 3443.71,
+    low_price: 3415,
+    high_price: 3460,
+    open_price: 3415,
+    prev_close_price: 3355.4,
+    ch: 96.65,
+    chp: 2.88,
+    type: 'sf'
+  }
+  
+#################### Response Attributes(Market Data Update)
+
+Attribute                | Data Type | Description
+---------------------------------------------------------------
+symbol                   | string    | The symbol in fyers symbology format whose data is
+ltp                      | float     | Last traded price of security or asset.
+prev_close_price         | float     | Previous day's close of security or asset.
+high_price               | float     | Current day's high of security or asset.
+low_price                | float     | Current day's low of security or asset.
+open_price               | float     | Current day's open of security or asset.
+ch                       | float     | Change in price of security or asset today.
+chp                      | float     | Change in price in % of security or asset today.
+vol_traded_today         | int       | Volume traded for security or asset today.
+last_traded_time         | int       | Last traded time of security or asset.
+bid_size                 | int       | The bid size key represents the quantity or volume of the security or asset that buyers are willing to purchase at a specific bid price level.
+ask_size                 | int       | The ask size key represents the quantity or volume of the security or asset that sellers are willing to sell at a specific ask price level.
+ask_price                | float     | The ask price key represents the lowest price at which sellers are willing to sell a particular security or asset.
+bid_price                | float     | The bid price key represents the highest price at which buyers are willing to purchase a particular security or asset.
+last_traded_qty          | int       | Last traded quantity of security or asset.
+tot_buy_qty              | int       | Total buy quantity of security or asset.
+tot_sell_qty             | int       | Total sell quantity of security or asset.
+avg_trade_price          | float     | Average trade price of security or asset.
+type                     | string    |  cn - connection message
+                                     |  sub - subscribe message
+                                     |  if - index data message
+                                     |  dp - market depth data message
+                                     |  sf - Equity and option data message
+
+
+##############################################################
+#############################################################
+################################################################
+
+# Market Data Lite-Mode
+The WebSocket API provides a lightweight and efficient "Lite Mode" for receiving only the Last Traded Price (LTP) updates of specific stock symbols. This mode is designed for users who require real-time access to LTP data without the additional overhead of subscribing to other stock data fields. The Lite Mode allows for seamless integration into applications where only the latest stock prices are needed.
+
+
+# The Node Script
+
+const FyersSocket = require("fyers-api-v3").fyersDataSocket
+
+var fyersdata= new FyersSocket("xxxxx-1xx:ey....")
+
+function onmsg(message){
+    console.log(message)
+    }
+}
+
+function onconnect(){
+    fyersdata.subscribe(['NSE:NIFTY50-INDEX','NSE:TCS-EQ']) //not subscribing for market depth data
+    fyersdata.subscribe(['NSE:IDEA-EQ'],true) //subscribing for market depth
+    fyersdata.mode(fyersdata.LiteMode) //set data mode to lite mode
+    fyersdata.autoreconnect() //enable auto reconnection mechanism in case of disconnection
+}
+
+function onerror(err){
+    console.log(err)
+}
+
+function onclose(){
+    console.log("socket closed")
+}
+
+fyersdata.on("message",onmsg)
+fyersdata.on("connect",onconnect)
+fyersdata.on("error",onerror)
+fyersdata.on("close",onclose)
+
+fyersdata.connect()
+
+------------------------------------------------------------------------------------------------------------------------------------------
+Sample Success Response 
+------------------------------------------------------------------------------------------------------------------------------------------
+          
+{
+  symbol: 'NSE:IDEA-EQ',
+  ltp: 7.55,
+  type: 'sf'
+}

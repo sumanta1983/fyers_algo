@@ -1,0 +1,100 @@
+Market Data Depth Update
+The WebSocket API for receiving stock data is a real-time communication protocol designed to provide seamless and low-latency access to live stock market data. This API allows developers and traders to establish a persistent, bidirectional connection with the server, enabling them to receive continuous updates on stock prices, trading volumes, and other relevant market information.
+
+To quickly get started with the WebSocket API and start receiving real-time stock data, you can explore our sample scripts and code examples in our GitHub repository:
+Data WebSocket Sample Scripts
+
+# Node Code
+
+const FyersSocket = require("fyers-api-v3").fyersDataSocket
+
+var fyersdata= new FyersSocket("xxxxx-1xx:ey....")
+
+function onmsg(message){
+    console.log(message)
+}
+
+function onconnect(){
+    fyersdata.subscribe(['NSE:IDEA-EQ'],true) //subscribing for market depth
+    fyersdata.autoreconnect() //enable auto reconnection mechanism in case of disconnection
+}
+
+function onerror(err){
+    console.log(err)
+}
+
+function onclose(){
+    console.log("socket closed")
+}
+
+fyersdata.on("message",onmsg)
+fyersdata.on("connect",onconnect)
+fyersdata.on("error",onerror)
+fyersdata.on("close",onclose)
+
+fyersdata.connect()
+
+------------------------------------------------------------------------------------------------------------------------------------------
+Sample Success Response 
+------------------------------------------------------------------------------------------------------------------------------------------
+          
+  {
+    symbol: 'NSE:IDEA-EQ',
+    bid_price1: 8.25,
+    bid_price2: 0,
+    bid_price3: 0,
+    bid_price4: 0,
+    bid_price5: 0,
+    ask_price1: 0,
+    ask_price2: 0,
+    ask_price3: 0,
+    ask_price4: 0,
+    ask_price5: 0,
+    bid_size1: 245373,
+    bid_size2: 0,
+    bid_size3: 0,
+    bid_size4: 0,
+    bid_size5: 0,
+    ask_size1: 0,
+    ask_size2: 0,
+    ask_size3: 0,
+    ask_size4: 0,
+    ask_size5: 0,
+    bid_order1: 34,
+    bid_order2: 0,
+    bid_order3: 0,
+    bid_order4: 0,
+    bid_order5: 0,
+    ask_order1: 0,
+    ask_order2: 0,
+    ask_order3: 0,
+    ask_order4: 0,
+    ask_order5: 0,
+    type: 'dp'
+  }
+
+
+################### Response Attributes(Depth Update)
+
+
+Attribute                     | Data Type | Description
+--------------------------------------------------------------------------------------------------------------------------------
+symbol                        | string    | The symbol in fyers symbology format whose data is received on socket.
+
+bid_price1-bid_price5         | float     | The bid price key represents the highest price at which buyers are willing to purchase a particular security or asset.
+
+ask_price1-ask_price5         | float     | The ask price key represents the lowest price at which sellers are willing to sell a particular security or asset.
+
+bid_size1-bid_size5           | integer   | The bid size key represents the quantity or volume of the security or asset that buyers are willing to purchase at a specific bid price level.
+
+ask_size1-ask_size5           | integer   | The ask size key represents the quantity or volume of the security or asset that sellers are willing to sell at a specific ask price level.
+
+bid_order1-bid_order5         | integer   | The number of bid order.
+
+ask_order1-ask_order5         | integer   | The number of ask order.
+
+type                          | string    | cn  - connection message
+                                          | sub - subscribe message
+                                          | if  - index data message
+                                          | dp  - market depth data message
+                                          | sf  - Equity and option data message

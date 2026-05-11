@@ -1,0 +1,46 @@
+# Refresh Token
+Note: Refresh token will be discontinued from 1st April.
+
+When we validate the auth code to generate the access token, a refresh token is also sent in the response.
+
+The refresh token has a validity of 15 days. A new access token can be generated using the refresh token as long as the refresh token is valid.
+
+The following parameters must be passed in the body for the POST request
+
+Attribute        | Data Type | Description
+------------------------------------------------------------------------------------------------------------
+grant_type       | string    | The grant_type parameter must be set to "refresh_token".
+
+appIdHash        | string    | SHA-256 of api_id + app_secret.
+                               Eg:
+                               SHA-256 of app_id:app_secret is
+                               c7120d2b5004f8de22d8dc2da0453b4d7e6211e37a4108b8371266ecff00498.
+                               You can use this online tool for reference:
+                               https://emn178.github.io/online-tools/sha256.html
+
+refresh_token    | string    | The refresh token previously issued to the client from the validate auth code API.
+
+pin              | string    | The user's pin
+
+
+# it have only CURL
+
+curl --location --request POST 'https://api-t1.fyers.in/api/v3/validate-refresh-token' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+  "grant_type": "refresh_token",
+  "appIdHash": "c3efb1075ef2332b3a4ec7d44b0f05c1********************",
+  "refresh_token": "eyJ0eXAiOiJKV1***.eyJpc3MiOiJhcGkuZn***.5_Qpnd1nQXBw1T_wNJNFF***",
+  "pin": "****"
+}'
+
+----------------------------------------------------------------------------------
+Sample Success Response 
+----------------------------------------------------------------------------------
+
+{
+    "s": "ok",
+    "code": 200,
+    "message": "",
+    "access_token": "eyJ0eXAiOiJK***.eyJpc3MiOiJhcGkuZnllcnM***.IzcuRxg4tnXiULCx3***"
+}

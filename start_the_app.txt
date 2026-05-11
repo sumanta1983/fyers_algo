@@ -1,0 +1,178 @@
+fyers_algo — local-services startup guide
+==========================================
+
+This setup uses LOCAL Postgres + LOCAL Redis (no Docker).
+Project root: /home/sumanta/Workdrive/fyers/fyers_algo
+
+Tip: load .env into the current shell so $REDIS_PORT etc. are available below:
+
+    cd /home/sumanta/Workdrive/fyers/fyers_algo
+    set -a && source .env && set +a
+
+
+0. One-time setup
+=================
+
+0a. Verify env file
+-------------------
+cat .env | head -10        # confirm FYERS_CLIENT_ID, POSTGRES_*, REDIS_* are filled in
+
+Current values you've settled on:
+  POSTGRES_HOST=localhost  POSTGRES_PORT=5432  POSTGRES_USER=postgres
+  POSTGRES_PASSWORD=postgres  POSTGRES_DB=fyers_algo
+  REDIS_HOST=localhost  REDIS_PORT=6380  REDIS_PASSWORD=Baymax1983
+
+0b. Pin Fyers SDK version (already done, kept here for the record)
+------------------------------------------------------------------
+sed -i 's/"fyers-api-v3": "\^3.1.0"/"fyers-api-v3": "^1.8.0"/' node_backend/package.json
+
+0c. Install Node dependencies
+-----------------------------
+cd node_backend && npm install && cd ..
+
+0d. Create the Python venv and install deps
+-------------------------------------------
+python3.12 -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
+# Every new terminal that runs Python needs: source .venv/bin/activate
+
+0e. Initialise the database schema
+----------------------------------
+./scripts/init_db.sh
+# Creates `fyers_algo` if missing + applies node_backend/migrations/*.sql.
+# Safe to re-run (idempotent). Use `./scripts/init_db.sh --reset` to wipe + recreate.
+
+
+1. Confirm local services are up
+================================
+
+# Postgres
+psql -h 127.0.0.1 -U postgres -d fyers_algo -c "\dt"
+# Expected tables: instruments, watchlists, watchlist_symbols, candles_1m, signals, strategy_state
+
+# Redis (local instance is on port 6380 with password)
+redis-cli -p "$REDIS_PORT" -a "$REDIS_PASSWORD" ping
+# Expected: PONG  (the "Warning: Using a password with '-a'..." line is harmless)
+
+
+2. Generate a Fyers access token (re-run each trading day)
+==========================================================
+
+# The refresh-token endpoint was discontinued by Fyers — re-auth daily.
+source .venv/bin/activate
+python -m app_token.generate_token
+
+# Browser opens → log in → Fyers redirects with ?auth_code=... → paste it at the prompt.
+
+# Verify the token landed in Redis:
+redis-cli -p "$REDIS_PORT" -a "$REDIS_PASSWORD" GET token:fyers:access
+
+
+3. Start the Node backend — Terminal A
+======================================
+
+# Fyers WebSocket subscriber + 1-min candle aggregator + M6 HTTP/WS API.
+cd node_backend
+node src/index.js
+
+# Expected log sequence:
+#   fyers token loaded
+#   starting historical backfill
+#   api listening   (host=0.0.0.0  port=4000)
+#   fyers ws connected, subscribing
+
+# Smoke-check the API (from any other terminal):
+curl http://localhost:4000/health                  # {"status":"ok"}
+curl http://localhost:4000/strategies              # {"strategies":["ema_crossover"]}
+curl http://localhost:4000/strategies/active       # {"active":"ema_crossover", ...}
+
+# During market hours (09:15–15:30 IST) the LTP cache fills:
+redis-cli -p "$REDIS_PORT" -a "$REDIS_PASSWORD" HGETALL ltp:NSE:RELIANCE-EQ
+
+
+4. Start the Python strategy engine — Terminal B
+================================================
+
+source .venv/bin/activate
+cd python_engine
+python -m engine.main
+
+# Expected log lines on boot:
+#   active strategy: ema_crossover (lookback=30)
+#   subscribed: candle.closed.* + strategy.changed
+#
+# Each minute close it logs:
+#   evaluated ema_crossover on NSE:RELIANCE-EQ -> None
+# or, when a crossover fires:
+#   SIGNAL BUY NSE:RELIANCE-EQ @ 2904.50 (ema_crossover @ 2026-05-11T10:23:00+05:30)
+
+
+5. (Optional) Subscribe to the live signals feed — Terminal C
+=============================================================
+
+npm i -g wscat 2>/dev/null         # one-time, or use websocat / curl --include
+wscat -c ws://localhost:4000/ws/signals
+# Filter to a single symbol:
+wscat -c 'ws://localhost:4000/ws/signals?symbol=NSE:RELIANCE-EQ'
+
+# First message: {"type":"hello",...}
+# Every fired signal: {"type":"signal","symbol":...,"side":"BUY","price":...}
+
+
+6. Off-hours smoke test (no market data required)
+=================================================
+
+# With Node + engine running, drive a synthetic candle through the pipeline:
+redis-cli -p "$REDIS_PORT" -a "$REDIS_PASSWORD" PUBLISH \
+  candle.closed.NSE:RELIANCE-EQ \
+  '{"symbol":"NSE:RELIANCE-EQ","ts":1714900800,"open":2900,"high":2905,"low":2898,"close":2904,"volume":12345}'
+# Engine logs: evaluated ema_crossover on NSE:RELIANCE-EQ -> None
+# (One synthetic candle won't cross, but the full dispatch path is exercised.)
+
+# Switch the active strategy via M6 API (engine hot-swaps on strategy.changed):
+curl -X PUT http://localhost:4000/strategies/active \
+  -H 'content-type: application/json' \
+  -d '{"name":"ema_crossover"}'
+
+# List recent signals from Postgres via the API:
+curl 'http://localhost:4000/signals?limit=10'
+
+
+7. Shutdown
+===========
+
+Ctrl+C in each terminal. Both Node and the Python engine handle SIGINT and close
+cleanly (DB pool drained, Redis connections closed, Fyers WS closed).
+
+Local services (Postgres, Redis) stay running between sessions — leave them be.
+
+
+Daily run order summary (after one-time setup is done)
+======================================================
+
+cd /home/sumanta/Workdrive/fyers/fyers_algo
+set -a && source .env && set +a
+
+# Once per trading day:
+source .venv/bin/activate && python -m app_token.generate_token
+
+# Terminal A:
+( cd node_backend && node src/index.js )
+
+# Terminal B:
+( source .venv/bin/activate && cd python_engine && python -m engine.main )
+
+# Terminal C (optional):
+wscat -c ws://localhost:4000/ws/signals
+
+
+Troubleshooting cheatsheet
+==========================
+
+NOAUTH Authentication required          → REDIS_PASSWORD missing in .env
+Connection refused on :6379             → local Redis is on 6380; set REDIS_PORT=6380
+psql ... "Did not find any tables."     → run ./scripts/init_db.sh
+ECONNREFUSED 127.0.0.1:5432             → local Postgres not running (sudo systemctl start postgresql)
+fyers token loaded → 401 from Fyers     → token expired; rerun step 2 (generate_token)
+api listening but /signals empty        → no signals fired yet; check engine logs in Terminal B

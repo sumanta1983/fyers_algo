@@ -1,0 +1,7 @@
+Rate Limits
+Note: Due to SEBI’s retail algo trading regulations, changes to its usage may take effect on April 1, 2026. Please refer to the link for further details.
+
+Timeframe	Rate Limit
+Per Second	10
+Per Minute	200
+Per Day	    1,00,000

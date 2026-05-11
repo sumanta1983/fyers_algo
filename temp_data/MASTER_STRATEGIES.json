@@ -1,0 +1,2279 @@
+[
+  {
+    "strategy_name": "IC Setup (Institutional Candles Setup)",
+    "instrument": "BANKNIFTY",
+    "timeframe": "15min",
+    "session": "Not after 3 PM",
+    "setup_conditions": [
+      "200 point plus का हमें candle चाहिए — एक candle में 200 point का minimum up side या down side का move आना चाहिए",
+      "Timeframe होगा 15 minute",
+      "Candle indecision वाला नहीं होना चाहिए — institutional candles कभी भी indecision वाला candle नहीं आता, एक biased candle आता है",
+      "Fibonacci tool से candle के top से bottom (sell के लिए) या bottom से top (buy के लिए) draw करके 0.75 का zone निकालना है",
+      "Setup तब activate होगा जब price 0.75 zone के आसपास जाएगा — अगर 0.75 zone पर नहीं गया तो setup activate नहीं हुआ, we won't trade",
+      "3 बजे के बाद setup को activate नहीं करवाएंगे — not after 3 PM",
+      "Institutional buy setup create हो रहा है और market अभी all time high में है तो वहाँ पे activate नहीं करेंगे",
+      "Institutional sell setup generate हो रहा है और market all time low या power swing low के आसपास है तो sell side को activate नहीं करेंगे",
+      "Institutional candle का low (buying के time) नहीं टूटना चाहिए — अगर low टूट गया तो setup खराब हो गया",
+      "Institutional candle का high (selling के time) नहीं टूटना चाहिए"
+    ],
+    "entry_trigger": {
+      "type": "BUY or SELL — depends on candle color",
+      "candle_pattern": "Institutional candle (200+ point biased candle on 15 min)",
+      "conditions": [
+        "Red candle आया है तो institutional selling candle — sell side देखेंगे; green candle आया है तो institutional buying candle — buy side देखेंगे",
+        "Sell के लिए: Fibonacci top से bottom तक लगाएंगे, 0.75 zone निकालेंगे, 1 minute chart पे shift होंगे, जैसे 0.75 के level को touch करता हुआ एक candle close करेगा और उसके नीचे आएगा — वहाँ पे sell करेंगे",
+        "Buy के लिए: Fibonacci bottom से top तक लगाएंगे, 0.75 zone निकालेंगे, 1 minute chart पे shift होंगे, जैसे 0.75 के zone को touch करता हुआ 1 minute का candle close करेगा और उसके ऊपर निकलेगा — वहाँ पे buy करेंगे",
+        "0.75 के ऊपर जाके close कर रहा है candle फिर भी चलेगा — उसके नीचे जैसे आएगा, sell करेंगे",
+        "Candle color, candle size, candle structure — nothing matters at all at entry on 1 minute"
+      ],
+      "indicator_values": "Fibonacci Retracement — 0.75 level (0.786 को 0.75 में बदलना है), 0.5 level, 0 और 1 level tick करना है; बाकी सब un-tick करना है"
+    },
+    "stop_loss": {
+      "method": "Institutional candle का high या low",
+      "description": "SL हो जाएगा institutional candle का high या low — selling के time institutional candle का high हमारा SL, buying के time institutional candle का low हमारा SL; दो तीन चार टिक इधर उधर"
+    },
+    "targets": [
+      "Initial target: institutional candle का last point — buying के time candle का lower end (bottom), selling के time candle का lower end",
+      "Middle में अगर बहुत भयंकर कुछ price action या change of character दिख गया तो वहाँ से exit करेंगे",
+      "Trail करके निकल सकते हैं"
+    ],
+    "exit_rules": [
+      "Middle में market रुक गया, news आ गया, कुछ bullishness create हो गई — trail करके निकल जाएंगे",
+      "Change of character दिख गया तो वहाँ से exit करेंगे",
+      "Institutional candle का low टूट जाए (buying में) तो setup खराब — exit"
+    ],
+    "risk_management": "100% कुछ नहीं है, इसलिए stop losses use करते हैं; never judge a strategy until it is tested for at least a hundred times; पहले rules के साथ stick करो, profit बना लो, फिर tweaks करो",
+    "filters": [
+      "Indecision candle को avoid कीजे — जो अपने आप में ही indecision है उस तरह का candle avoid करें",
+      "3 बजे के बाद setup activate नहीं करवाएंगे",
+      "Institutional buy setup और market all time high में — activate नहीं करेंगे",
+      "Institutional sell setup और market power swing low के आसपास — sell side activate नहीं करेंगे",
+      "0.75 zone पर नहीं गया तो setup activate नहीं हुआ — we won't trade",
+      "Institutional candle का high टूट जाए (selling में) — setup void",
+      "Institutional candle का low टूट जाए (buying में) — setup void"
+    ],
+    "confidence": "HIGH",
+    "source_timestamps": [
+      "00:03:01",
+      "00:06:22",
+      "00:07:02",
+      "00:07:31",
+      "00:08:03",
+      "00:08:40",
+      "00:09:58",
+      "00:10:05",
+      "00:10:47",
+      "00:11:13",
+      "00:11:33",
+      "00:11:56",
+      "00:12:37",
+      "00:13:07",
+      "00:13:23",
+      "00:13:41",
+      "00:14:11",
+      "00:14:31",
+      "00:14:42",
+      "00:14:57",
+      "00:15:00",
+      "00:15:03",
+      "00:15:55",
+      "00:16:04"
+    ],
+    "direct_quotes": [
+      "IC setup — institutional candles",
+      "200 plus होना चाहिए, rules are rules, not 199, not 190, not 200 — 200 plus",
+      "Timeframe होगा 15 minute",
+      "Fibonacci का 0.75 का level हमारे लिए important है",
+      "जैसे 0.75 के level को touch करता हुआ एक candle close करेगा और उसके नीचे आएगा तो हम वहाँ पे जाके sell करेंगे",
+      "Candle color, candle size, candle structure, nothing matters at all",
+      "SL हो जाएगा institutional candle का high या low",
+      "3 बजे के बाद नहीं करवाएंगे",
+      "Low नहीं टूटना चाहिए institutional candle का buying के side में और selling के time पे high नहीं टूटना चाहिए",
+      "Never judge a strategy until it is tested for at least a hundred times",
+      "Institutional candles कभी भी indecision वाला candle नहीं आता, एक biased candle आता है",
+      "Institutional buy setup create हो रहा है और market है अभी all time high में — तो वहाँ पे हम उसको activate नहीं करेंगे",
+      "Institutional sell setup generate हो रहा है और market है all time low के आसपास — तो वहाँ पे हम sell site को activate नहीं करेंगे"
+    ],
+    "notes": "0.5 level Fibonacci में इसलिए mark करना है क्योंकि gap strategy में उसका use होगा — teacher ने golden mark से 0.5 को mark करने को कहा। Teacher ने यह भी बताया कि buffer रखना चाहिए — BANKNIFTY में 20-25 point का और NIFTY में 8-10 point का। Setup को कम से कम 100 बार test करने के बाद judge करें।",
+    "source_video": "InstitutionalCandles-IC_Setup"
+  },
+  {
+    "strategy_name": "Gaps Strategy with SMC Filter",
+    "instrument": "BANKNIFTY",
+    "timeframe": "15min",
+    "session": null,
+    "setup_conditions": [
+      "Gap up or gap down open on BANKNIFTY",
+      "SMC (Smart Money Concept) trend direction must align with the gap trade direction",
+      "If SMC shows selling zone (supply area) and gap theory gives upside signal — do NOT trade",
+      "If SMC shows buying zone (demand area) and gap theory gives downside signal — do NOT trade",
+      "Check trend from daily chart frame or 1 hour chart frame",
+      "Trade only when gap direction aligns with SMC trend direction"
+    ],
+    "entry_trigger": {
+      "type": "BUY or SELL depending on gap direction aligned with SMC trend",
+      "candle_pattern": null,
+      "conditions": [
+        "Gap up open + SMC trend is up = BUY",
+        "Gap down open + SMC trend is down = SELL",
+        "Gap up open + SMC trend is down = IGNORE (do not buy)",
+        "Gap down open + SMC trend is up = IGNORE (do not sell)"
+      ],
+      "indicator_values": "SMC (Smart Money Concept) — Break of Structure, Change of Character, Point of Impact zones"
+    },
+    "stop_loss": {
+      "method": "tight SL",
+      "description": "SL बहुत tight रहता है 70 से 80 point"
+    },
+    "targets": [],
+    "exit_rules": [
+      "जब इतना दूर का मूवमेंट मिल जाएगा — 140 पॉइंट, 100 पॉइंट, 120 पॉइंट नीचे — strategy खत्म, टाटा बाइबाइ गुड नाइट",
+      "इतना बड़ा मूवमेंट के बाद अगर फिर तुरंत यहां पर रिवर्स आ जाएगा तो strategy बंद करो"
+    ],
+    "risk_management": "अगर मार्केट 1000 पॉइंट गैप ओपन हो जाता है और buying scenario generate होता है तो trade नहीं, या maximum 25% quantity से trade करेंगे — 25 percent quantity, 20 lot से ट्रेड करेंगे क्योंकि वह बहुत against probability हो जाता है",
+    "filters": [
+      "अगर मार्केट 1000 पॉइंट गैप अप ओपन हो और buying side scenario बने — trade avoid करो",
+      "अगर मार्केट 800-900 पॉइंट गैप डाउन ओपन हो और selling side scenario बने — trade ignore करो",
+      "India VIX अगर 20 के ऊपर रहेगा — यह strategy को दिमाग से, खाते से कुछ दिन के लिए बंद रखेंगे",
+      "अगर SMC बोल रहा है selling zone है और gap theory upside signal दे — वहां पर एक quantity भी नहीं लेंगे, 1 percent भी deploy नहीं करेंगे",
+      "बहुत बड़े movement के बाद reversal की संभावना हो — trade नहीं लेंगे क्योंकि risk-reward ठीक नहीं बैठेगा"
+    ],
+    "confidence": "HIGH",
+    "source_timestamps": [
+      "00:01:00",
+      "00:01:08",
+      "00:01:15",
+      "00:01:22",
+      "00:01:28",
+      "00:01:36",
+      "00:03:00",
+      "00:03:07",
+      "00:03:29",
+      "00:03:35",
+      "00:08:01",
+      "00:08:09",
+      "00:09:25",
+      "00:09:31",
+      "00:09:48"
+    ],
+    "direct_quotes": [
+      "किसी एक दिशा में अगर मान लीजिए बहुत बड़ा गैप ओपन हो जाता है मान लीजिए मार्केट 1000 पॉइंट गैप ओपन हो जाता है तो वहां पर अगर हमें बाइंग साइट का सिनेरियो जेनरेट होता हुआ दिखेगा हम वहां पर ट्रेड नहीं",
+      "25 परसेंट क्वांटिटी से ट्रेड कर सकता है आधा भी नहीं 25 परसेंट क्वांटिटी",
+      "इंडिया विक्स अगर बीच के ऊपर रहेगा... यह स्ट्रेटेजी को दिमाग से खाते से कुछ दिन के लिए बंद रखेंगे",
+      "SL बहुत tight रहता है 70 से 80 point",
+      "अगर आपको स्मार्ट मनी कॉनसेप्ट के हिसाब से दिख रहा है कि यहां पर सेलिंग जोन है तो भले वहां पर आपको गैप थ्यूरी अप साइट का सिग्नल जेनरेट कर दे आप वहां पर एक क्वांटिटी भी नहीं लेंगे वन परसेंट भी आप वहां पर डिप्लॉइन नहीं करेंगे",
+      "SMC supreme — इस द सुप्रीम इट इस द सुप्रीम"
+    ],
+    "notes": "Teacher explicitly said SMC (Smart Money Concept) is SUPREME over all other strategies including Gap Theory. Gap Theory signal must be validated by SMC direction. If SMC and Gap Theory conflict, follow SMC and ignore Gap Theory signal entirely.",
+    "source_video": "Chapter_2_GAP-2"
+  },
+  {
+    "strategy_name": "Gap with Inside Candle Strategy",
+    "instrument": "BANKNIFTY",
+    "timeframe": "15min",
+    "session": null,
+    "setup_conditions": [
+      "Gap up or gap down open on market",
+      "Inside candle must form after the gap open — within first 1-2 candles after gap",
+      "Inside candle means: second candle's body must be inside the first (mother) candle's body",
+      "Mother candle = first big candle, Baby candle = smaller candle inside mother candle",
+      "SMC trend direction must be checked from daily chart or 1 hour chart frame",
+      "Inside candle signal must align with SMC trend direction — only trend-aligned trades"
+    ],
+    "entry_trigger": {
+      "type": "BUY or SELL based on SMC trend alignment",
+      "candle_pattern": "Inside Candle (Mother Candle and Baby Candle)",
+      "conditions": [
+        "Original rule: Mother candle के high के ऊपर जाएगा तो buy, low के नीचे जाएगा तो sell",
+        "Tweaked rule (aggressive): Baby candle के low के नीचे जाएगा तो sell, baby candle के high के ऊपर जाएगा तो buy",
+        "अगर SMC बता रहा है कि trend up है तो gap up पे inside candle मिलने के बाद upside activate हो — BUY",
+        "अगर SMC बता रहा है कि trend down है और gap up पे inside candle मिलने के बाद downside activate हो — SELL",
+        "अगर trend downside है, gap down मिला, inside candle मिली, और upside तोड़े — WE WON'T BUY",
+        "अगर trend downside है, gap down के बाद inside candle downside दे रहा है — तुरंत SELL लेंगे"
+      ],
+      "indicator_values": "SMC (Smart Money Concept) — trend confirmation from daily or 1 hour chart"
+    },
+    "stop_loss": {
+      "method": "Mother candle based or Baby candle based",
+      "description": "मदर कैंडल के नीचे जैसे निकलेगा — stoploss; or baby candle के high/low based SL (aggressive approach)"
+    },
+    "targets": [],
+    "exit_rules": [],
+    "risk_management": "पोजीशन साइजिंग में ट्विक करेंगे — जिस दिन कॉन्फिडेंस ज्यादा हो उस दिन position size बढ़ाओ, जिस दिन psychology weak हो उस दिन position size घटाओ। अगर SMC और Gap Theory दोनों एक ही दिशा में हों — double quantity ले सकते हो",
+    "filters": [
+      "इंसाइड कैंडल को कभी भी मत ढूंढिए — सिर्फ gap के पहले एक दो कैंडल में ढूंढने की कोशिश कीजिए",
+      "अगर trend upside है तो gap up पर inside candle का downside signal — लेंगे नहीं",
+      "अगर trend downside है तो gap down पर inside candle का upside signal — लेंगे नहीं",
+      "SMC selling zone में gap theory upside signal दे — trade नहीं लेंगे"
+    ],
+    "confidence": "HIGH",
+    "source_timestamps": [
+      "00:11:32",
+      "00:11:38",
+      "00:11:49",
+      "00:13:41",
+      "00:13:47",
+      "00:13:53",
+      "00:13:57",
+      "00:14:02",
+      "00:14:07",
+      "00:14:37",
+      "00:14:46",
+      "00:14:53",
+      "00:14:57",
+      "00:15:05",
+      "00:15:08",
+      "00:15:12",
+      "00:15:17",
+      "00:15:22",
+      "00:15:25"
+    ],
+    "direct_quotes": [
+      "15 मिनट का कैंडल स्टिक — inside candle को हम कैसे यूज करेंगे",
+      "इंसाइड कैंडल मतलब — एक कैंडल के बॉडी के अंदर दूसरे कैंडल का बॉडी आ जाए, उसका बॉडी बाहर नहीं निकलना चाहिए",
+      "मदर कैंडल पहले वाला बड़ा वाला candle का high के ऊपर जाएगा तो buy, low के निचे जाएगा तो sell",
+      "अभी लोग क्या करता है baby candle के low के निचे जाएगा तो sell, baby candle के high के ऊपर जाएगा तो buy",
+      "अगर आपको SMC बता रहा है कि trend up है तो आपको gap up पे inside candle अगर मिलके upside मिलेगा we are going to buy",
+      "अगर आपको SMC बता रहा है कि trend down है और अगर gap up पे आपको inside candle मिलने के बाद downside का activate होने को दिख रहा है तो we are going to sell",
+      "इंसाइट कैंडल को हमें बस ट्रेंड के साथ लेना है",
+      "इंसाइट कैंडल को कभी भी मत ढूंढिए — सिर्फ गैप की बात कर रहा हूं — पहले के एक दो कैंडल में ढूंढने की कोशिश कीजिएगा"
+    ],
+    "notes": "Teacher mentioned two versions of inside candle rule: (1) Original/classical rule — use Mother candle high/low for entry trigger; (2) Tweaked/aggressive rule — use Baby candle high/low for entry trigger. Teacher said both have backtested profitability. Inside candle strategy must ONLY be used with trend alignment confirmed by SMC. Teacher also said: 'एक बार आपको इस strategy में entry कर दी — entry से पहले जितना सोचना है सोच लो, entry के बाद ongoing analysis मत करो।'",
+    "source_video": "Chapter_2_GAP-2"
+  },
+  {
+    "strategy_name": "SMC Liquidity Based Trading",
+    "instrument": "NIFTY",
+    "timeframe": "minimum 15 min",
+    "session": null,
+    "setup_conditions": [
+      "Market always tries to grab liquidity before making a big move",
+      "Liquidity is highest at: 1) Horizontal lines (support/resistance levels) 2) Trend lines 3) Last swings",
+      "High liquidity areas are where buy limit orders, sell limit orders, and stop losses are accumulated",
+      "Market direction se opposite side ka liquidity pehle grab karta hai",
+      "Before entry zone (order block / FVG), there must be a liquidity area present",
+      "Jab market directly order block pe aata hai bina liquidity grab kiye, toh maximum time fakeness/fakeout hota hai",
+      "Liquidity grab hone ke baad hi market pe ek bada move aata hai",
+      "Dono side ka liquidity: jo zone dono baar respect kar le, wahan sabse zyada liquidity pada hota hai"
+    ],
+    "entry_trigger": {
+      "type": "BUY",
+      "candle_pattern": "W pattern",
+      "conditions": [
+        "Order block area ke paas liquidity sweep ho chuka ho",
+        "Break of structure validate ho",
+        "Liquidity area order block se pehle present hona chahiye",
+        "Entry method: W pattern ya range milke breakout",
+        "Agar market directly order block pe aaye bina liquidity grab kiye, toh 10%-20% quantity se hi buy karo"
+      ],
+      "indicator_values": null
+    },
+    "stop_loss": {
+      "method": null,
+      "description": "SL un logon ka pada hota hai jo last swing se buy/sell karte hain — teacher ne SL concept liquidity explanation mein use kiya, specific SL placement method nahi bataya"
+    },
+    "targets": [
+      "Next point of impact (unmitigated order block area) tak market jaata hai",
+      "Market apne ultimate target ke aaspaas jaata hai"
+    ],
+    "exit_rules": [],
+    "risk_management": "Agar market directly order block pe aaye bina liquidity grab kiye toh maximum 10%-20% quantity se buy karo",
+    "filters": [
+      "1 minute ya 5 minute timeframe par liquidity mat dekho — bahut confusing hoga, minimum 15 minute ka liquidity dekho",
+      "Agar order block ke paas koi liquidity area nahi tha, toh directly full quantity se buy mat karo",
+      "Fair value gap wali liquidity ko target mat karo — institution apna khud ka liquidity sweep nahi karega",
+      "Jab market opposite side ki liquidity grab kiye bina direct upar/neeche jaata hai, maximum time fakeout hota hai — wahan trade avoid karo"
+    ],
+    "confidence": "HIGH",
+    "source_timestamps": [
+      "00:02:31",
+      "00:03:32",
+      "00:11:01",
+      "00:11:38",
+      "00:13:02",
+      "00:14:02",
+      "00:15:41",
+      "00:17:02",
+      "00:17:09",
+      "00:26:06",
+      "00:26:10",
+      "00:27:46",
+      "00:27:57",
+      "00:28:17",
+      "00:28:42",
+      "00:29:21",
+      "00:37:12",
+      "00:37:57",
+      "00:38:00"
+    ],
+    "direct_quotes": [
+      "मार्किट हमेशा लिक्वीरिटी को ग्रैप करने में मार्किट को बहुत मजा आता है",
+      "लिक्विडिटी के बिना हम ट्रेड कभी नहीं ले सकते",
+      "जो भी लिक्विड हाई लिक्विड जोन होगा वहां पर मार्केट जरूर जाएगा",
+      "liquidity को खाने के बाद ही market पे एक बड़ा move आता है",
+      "हमें चाहिए हमारे order block से पहले एक liquidity area ताकि हमें कोई भी fakeness का creation ना देखना पड़े",
+      "हमारे entry से पहले एक liquidity area होना चाहिए",
+      "entry का method क्या रहता है, हमारा permanent W pattern",
+      "market के direction के अगर opposite मान लीज़े market उपर जा रहा है और opposite way में liquidity बढ़ा हुआ है, market पहले opposite side का liquidity grab करके फिर smoothly उपर जाएगा",
+      "दस में से आठ बार liquidity sweep होता है, दो बार नहीं होता है",
+      "मिनिमम 15 मिनिट का लिक्विडी को आपको देखना है",
+      "SMC का जो लिफ्ट हैंड होता है ना वह लिक्विरिटी भावता है और राइट हम जो होता है वह स्ट्रक्शन हो जाता है",
+      "बड़े players को ताकि loss ना हो slippage से इसी लिए liquidity का एक concept create हुआ"
+    ],
+    "notes": "यह वीडियो SMC (Smart Money Concept) chapter का third video है जिसमें liquidity और inducement दोनों topics cover किए गए हैं। Teacher ने clearly बताया कि big players अपना SL खाने के लिए नहीं आते — वो sirf high liquidity area mein orders daalna chahte hain taaki unhe slippage na ho. Liquidity sweep = fuel for the next big market move.",
+    "source_video": "Chapter_3_Liquidity_Inducement"
+  },
+  {
+    "strategy_name": "Morning Momentum Expiry Trading",
+    "instrument": "BANKNIFTY / NIFTY",
+    "timeframe": "5min",
+    "session": "9:15 AM to 10:30 AM",
+    "setup_conditions": [
+      "Only trade on expiry day",
+      "Morning momentum session: 9 baj ke 15 minute se 10 baj ke 30 minute tak",
+      "Ye jo 1 ghanta 15 minute ka session hota hai - very important",
+      "Expiry ke din premium zyada badhta hai isliye morning momentum ka faayda milta hai",
+      "Beginners sirf aur sirf expiry mein try karenge",
+      "11 baje ke baad 10 mein se 8, saare 8 expiry mein 80 se 85 percent times choppy momentum shuru hota hai",
+      "Maximum retails ka loss hota hai 11 baje se lekar 2 baje ke beech",
+      "11 baje se 2 baje tak we won't trade in this time",
+      "5 minute pe koi bhi setup dikhe, 11 baje se 2 baje tak hum ismein trade nahi karte"
+    ],
+    "entry_trigger": {
+      "type": "BUY or SELL",
+      "candle_pattern": null,
+      "conditions": [
+        "Morning momentum 9:15 AM se 10:30 AM tak",
+        "5 minute timeframe pe setup dekhna hai"
+      ],
+      "indicator_values": null
+    },
+    "stop_loss": {
+      "method": "Fixed points on spot",
+      "description": "Stop loss spot pe 50 point ke neeche aata hai"
+    },
+    "targets": [
+      "Target fix nahi hota morning momentum mein",
+      "Target ko trail karke chalna hai hamesha"
+    ],
+    "exit_rules": [
+      "Target ko trail karke chalna hai hamesha"
+    ],
+    "risk_management": "Position sizing ko over nahi karna - das lot ke jagah par sau lot direct nahi karna. Morning momentum mein 10,000 lagao, 3,000 profit hua toh usme se 2,000 risk lagao jackpot ke liye, 1,000 already booked rakho.",
+    "filters": [
+      "11 baje se 2 baje tak trade nahi karna - choppy momentum",
+      "Doosre din (non-expiry) bilkul bhi unadvisable hai beginners ke liye",
+      "Expiry ko special mat banao - emotional aur psychological trap se bachna"
+    ],
+    "confidence": "HIGH",
+    "source_timestamps": [
+      "00:13:17",
+      "00:13:21",
+      "00:13:24",
+      "00:13:25",
+      "00:13:29",
+      "00:13:33",
+      "00:13:35",
+      "00:13:39",
+      "00:13:43",
+      "00:13:45",
+      "00:13:49",
+      "00:13:53",
+      "00:13:57",
+      "00:14:01",
+      "00:14:43",
+      "00:14:45",
+      "00:18:07",
+      "00:18:09",
+      "00:18:11",
+      "00:27:44",
+      "00:27:50",
+      "00:27:53",
+      "00:27:56",
+      "00:28:03",
+      "00:28:06",
+      "00:28:10",
+      "00:28:13",
+      "00:28:16",
+      "00:28:50",
+      "00:28:59",
+      "00:29:01"
+    ],
+    "direct_quotes": [
+      "morning momentum इसमें हमें trade करना है, expiry में इसका timing क्या रहता है, 9 बच के 15 मिनिट से 10 बच के 30 मिनिट तक",
+      "11 बजे के बाद बिल्कुल ही शुरू हो जाता है, choppy momentum",
+      "10 में से 8, सारे 8 expiry में 80 से 85 percent times, choppy momentum शुरू होता है",
+      "maximum retails का loss होता है, कितने बजे से - 11 बजे से लेके 2 बजे के बीच",
+      "morning momentum का time frame होगा 5 minutes",
+      "stop loss spot पे 50 point के नीचे आता है",
+      "target कभी भी fix नहीं होता है morning momentum पे",
+      "target को हमें trail करके चलना है हमेशा",
+      "beginners सिर्फ और सिर्फ expiry में try करेंगे"
+    ],
+    "notes": "Teacher ne kaha ki Wednesday bhi try kar sakte hain thoda sa, jaise jaise market mein time bitaoge. Lekin doosra din bilkul bhi unadvisable hai. Expiry ko 'special day' mat samjho - yahi sabse bada psychological trap hai retails ke liye.",
+    "source_video": "Chapter_1_TradeInExpiryLikeAPro"
+  },
+  {
+    "strategy_name": "Expiry Jackpot Types Framework",
+    "instrument": "BANKNIFTY / NIFTY",
+    "timeframe": null,
+    "session": "2:30 PM to 3:15 PM (Ending Momentum)",
+    "setup_conditions": [
+      "Teen types ka jackpot hota hai expiry mein: Mini Jackpot, Semi Jackpot, Full Jackpot",
+      "Jackpot dhundhna hai 2:30 baje ke baad",
+      "Ending momentum: 2:30 baje se lekar 3:15 baje tak (last 15 minute nahi - volume bahut kam ho jaata hai)",
+      "11 baje jackpot hum kabhi nahi dhundhte",
+      "Full Jackpot: probability 10 se 15 percent - 100 mein se 10-15 din",
+      "Semi Jackpot: probability 30 se 40 percent - 10 mein se 3-4 din",
+      "Mini Jackpot: probability 80 percent - 10 mein se 8 expiry mein",
+      "Nifty mein 500 aur 1000 ka round number - expiry try karta hai 500 ke neeche, 1000 ke upar ya 1000 ke neeche, 500 ke upar - round number ke beech mein hi expire karta hai",
+      "Expiry 10 mein se 8 baar ek range mein cover hota hai"
+    ],
+    "entry_trigger": {
+      "type": null,
+      "candle_pattern": "hammer candle (mentioned as example near order block)",
+      "conditions": [
+        "Full Jackpot ke liye: monthly expiry ho, 1-2 mahine se ek range bani ho aur aaj break ho rahi ho",
+        "Semi Jackpot ke liye: 2 baje ke baad market mein change of character ho, short covering aaye ya long unwinding ho",
+        "Choppy momentum time ke beech mein agar 1 hour mein liquidity grab hokar order block ke aaspaas bahut achha setup aa raha ho toh dekh sakte hain",
+        "11.30 baje ek range tod raha ho jo pichhle ek mahine se bani ho - risk le sakte hain",
+        "Order block wala area ho, liquidity grab hokar order block ke aaspaas aaya aur hammer candle dikha"
+      ],
+      "indicator_values": "SMC (Smart Money Concept) - order block, liquidity grab, change of character"
+    },
+    "stop_loss": {
+      "method": null,
+      "description": null
+    },
+    "targets": [
+      "Full Jackpot: capital bahut zyada multiply hota hai - market poora trending",
+      "Semi Jackpot: capital 6 guna se lekar 10 guna ban jaata hai (minimum 5 se 7 guna easily)",
+      "Mini Jackpot: minimum 3 guna to ban jaata hai, 3 times se lekar 5 times",
+      "BankNifty mini jackpot example: 30 rupee wala option 120 rupee tak jaata hai (4 guna), 25 rupee wala 80 rupee tak, 15 rupee wala 50 rupee tak",
+      "Nifty mini jackpot example: 8 rupee wala 32 rupee tak jaata hai"
+    ],
+    "exit_rules": [],
+    "risk_management": "Morning momentum mein profit kamao, uska kuch hissa jackpot ke liye risk lo. Jaise 3,000 profit mein se 2,000 risk lagao, 1,000 ghar le jaao.",
+    "filters": [
+      "Full Jackpot hamesha nahi milega - 2-3 mahine mein ek baar",
+      "11 baje jackpot kabhi nahi dhundhte",
+      "Last 15 minute (3:15 ke baad) trade nahi karna - volume bahut kam ho jaata hai aur bahut choppy ho jaata hai",
+      "Normal weekly expiry mein 11 baje se 2 baje ke beech chhota level toot raha ho toh trade nahi karte",
+      "Koi important zone expiry mein market todna nahi chahta"
+    ],
+    "confidence": "HIGH",
+    "source_timestamps": [
+      "00:16:02",
+      "00:16:05",
+      "00:16:07",
+      "00:16:09",
+      "00:16:16",
+      "00:16:39",
+      "00:16:42",
+      "00:18:16",
+      "00:18:18",
+      "00:18:22",
+      "00:18:24",
+      "00:18:26",
+      "00:18:28",
+      "00:18:30",
+      "00:18:43",
+      "00:18:46",
+      "00:18:48",
+      "00:18:50",
+      "00:19:20",
+      "00:19:21",
+      "00:19:54",
+      "00:20:03",
+      "00:21:02",
+      "00:22:23",
+      "00:22:29",
+      "00:23:15",
+      "00:23:20",
+      "00:23:25",
+      "00:23:28",
+      "00:23:31",
+      "00:23:38",
+      "00:23:41",
+      "00:23:45",
+      "00:23:47",
+      "00:23:51",
+      "00:23:54",
+      "00:23:56",
+      "00:23:58",
+      "00:24:01",
+      "00:24:04",
+      "00:24:07",
+      "00:24:30",
+      "00:24:33",
+      "00:24:36",
+      "00:24:38",
+      "00:24:43",
+      "00:24:46",
+      "00:24:49",
+      "00:24:52",
+      "00:24:54",
+      "00:24:57",
+      "00:25:01",
+      "00:25:34",
+      "00:25:41",
+      "00:25:43",
+      "00:25:47"
+    ],
+    "direct_quotes": [
+      "three types का jackpot होता है - mini jackpot, semi jackpot, full jackpot",
+      "jackpot कब ढूनना है, 2.30 बजे के बाद ढूनना है, 11 बजे jackpot हम कभी नहीं ढूनते",
+      "ending momentum कितने बजे से होता है, 2.30 बजे से लेके 3.30 बजे... last का 15 मिनिट पे movement नहीं होता है",
+      "500 और 1000 का जो number होता है bank nifty में, expiry try करता है 500 के नीचे, 1000 के उपर - round number के बीच में ही expire करता है",
+      "expiry 10 में से 8 बार, एक range में cover होता है",
+      "full jackpot होने का chances रह जाता है 10 से 15 percent",
+      "semi-jackpot आता है, आपका लगबग 30 से लेके 40%",
+      "mini jackpot - 10 में से 8 expiry में देखने को मिलता है",
+      "Semi-jackpot में capital 6 गुना से लेके 10 गुना बन जाता है",
+      "mini-jackpot पे बनता है minimum 3 गुना तो बन जाता है, 3 times से लेके 5 times",
+      "bank nifty में 30 रुपे वाला option 120 रुपे जाके फिर गिर जाता है",
+      "nifty में 8 रुपे वाला 32 रुपे जाके चला आता है",
+      "downside में और ज्यादा बनता है, क्योंकि आपको ही पता है, नीचे market speed में गिरता है"
+    ],
+    "notes": "Teacher ne bataya ki Full Jackpot monthly expiry mein dhundhna chahiye jab 1-2 mahine ki range break ho rahi ho. Semi Jackpot ke liye 2 baje ke baad change of character ya short covering/long unwinding dekhna hai. Mini Jackpot ka detailed method next video mein bataya jaayega. Downside mein aur zyada banta hai kyunki market speed mein girta hai neeche.",
+    "source_video": "Chapter_1_TradeInExpiryLikeAPro"
+  },
+  {
+    "strategy_name": "SMT - Smart Money Trading (BOS, CHOCH, OB)",
+    "instrument": null,
+    "timeframe": "5min / 15min / 1hour / 1day (teacher suggested these)",
+    "session": null,
+    "setup_conditions": [
+      "BOS (Break of Structure) = market बनाता है एक swing, उसके बाद अगर वो swing को break करके उसके उपर निकल जाएगा, तो वो break of structure है",
+      "BOS एक continuation pattern है - जब market एक continuation में जाएगा",
+      "CHOCH (Change of Character) = reversal, जब market अपना last swing को cross करके character को change करता है",
+      "Valid CHOCH सिर्फ तब होगा जब वो last swing को break करने के बाद अपना character को change करेगा",
+      "OB = Order Block (mentioned as third concept to learn in this video)",
+      "break of structure के लिए candle close होना चाहिए - जब तक candle close नहीं करता है, तब तक sustain नहीं माना जाता है",
+      "अगर candle close नहीं करेगा और candle close ना करता हुआ उपर चला जाएगा तो वो break of structure नहीं रहेगा"
+    ],
+    "entry_trigger": {
+      "type": null,
+      "candle_pattern": null,
+      "conditions": [
+        "candle close होना चाहिए swing के उपर/नीचे तब ही break of structure valid माना जाएगा"
+      ],
+      "indicator_values": null
+    },
+    "stop_loss": {
+      "method": null,
+      "description": null
+    },
+    "targets": [],
+    "exit_rules": [],
+    "risk_management": null,
+    "filters": [
+      "अगर candle close नहीं करेगा तो break of structure valid नहीं माना जाएगा",
+      "90% retail traders जब last swing के नीचे market निकलता है तो sell कर देते हैं - यह valid reversal नहीं है, इससे बचना चाहिए",
+      "market थोड़ा नीचे आएगा, थोड़ा उपर जाएगा, फिर zone को touch करता हुआ नीचे आएगा - उनका SL खा देगा - यह trap है"
+    ],
+    "confidence": "MEDIUM",
+    "source_timestamps": [
+      "00:09:17",
+      "00:09:30",
+      "00:09:44",
+      "00:12:14",
+      "00:13:21",
+      "00:14:38",
+      "00:16:13",
+      "00:17:02",
+      "00:18:52",
+      "00:19:01",
+      "00:19:33",
+      "00:20:03",
+      "00:21:47",
+      "00:22:29"
+    ],
+    "direct_quotes": [
+      "BOS यानि कि break of structure - एक swing बनाएगा market, उसके बाद अगर वो swing को break करके उसके उपर निकल जाएगा, तो वो break of structure है",
+      "break of structure में candle close होना चाहिए - जब तक candle close नहीं करता है, जब तक sustain नहीं माना जाता है",
+      "change of character क्या है - reversal, बस, और कुछ नहीं है",
+      "valid reversal हमेशा माना जाता है, change of character सिर्फ और सिर्फ तब होगा जब वो last swing को break करने के बाद अपना character को change करेगा",
+      "ये जो BOS वगेडा वगेडा नाम आया है, ये सिर्फ और सिर्फ breakouts है",
+      "मैं suggest करूँगा, 5, 15, 1 hour, 1 day ही कीजिए, ज्यादा complicated मत रखे",
+      "SMC blindly follow करेंगे न, तो आप 10 में से 7 बार आपको trades ही नहीं मिलेगा"
+    ],
+    "notes": "यह वीडियो SMT (Smart Money Trading) का पहला वीडियो है जो कि एक chapter series का हिस्सा है। इस वीडियो में सिर्फ तीन concepts cover हैं: BOS, CHOCH, और OB। Teacher ने explicitly कहा कि यह SMC पर based है लेकिन Indian market के लिए modified किया गया है। Teacher ने यह भी कहा कि कोई भी strategy 100% result नहीं देती - हम सिर्फ probability के उपर trade करते हैं। आगे के chapters में Fair Value Gap, Liquidity Grab and Sweep, Inducement and Traps, और Real Life Scenarios cover होंगे।",
+    "source_video": "Chapter_1_SMC-Basics"
+  },
+  {
+    "strategy_name": "Sniper Scalp",
+    "instrument": "BANKNIFTY",
+    "timeframe": "15min और 1min",
+    "session": null,
+    "setup_conditions": [
+      "आपको तभी स्नाइपर स्कैल लेना है जब आपको SMC का बड़ा time frame में कोई entry नहीं मिल रहा है",
+      "SMC का कोई भी सेट अप एक्टिवेट नहीं हो रहा है - ना तो FVG मिल रही, कुछ भी नहीं मिल रहा",
+      "15 मिनट पर एक support या resistance ढूंढ लेना है और उसको mark कर देना है",
+      "Market उस support या resistance area के आसपास आए तो 1 minute timeframe पर जाएं",
+      "1 minute पर change of character (चेंज ऑफ कैरेक्टर) देखना है",
+      "Break of structure होना चाहिए 1 minute पर sniper area के आसपास",
+      "Market जहाँ भी pressure point होगा वहाँ react करेगा - swing पे, inducement पे, liquidity area पे, trend line पे",
+      "यह strategy तब use करें जब SMC से कोई entry न मिले - इसे अल्टिमेटम की तरह use कीजिए"
+    ],
+    "entry_trigger": {
+      "type": "BUY",
+      "candle_pattern": "green candle (1 minute timeframe पर change of character के बाद)",
+      "conditions": [
+        "15 minute पर support या resistance mark करें",
+        "Market उस area के आसपास आए",
+        "1 minute timeframe पर shift हो जाएं",
+        "1 minute पर break of structure हो",
+        "Change of character activate हो जाए",
+        "Candle close होने के बाद entry area mark करें और entry लें"
+      ],
+      "indicator_values": "SMC (Smart Money Concepts) - method है SMC"
+    },
+    "stop_loss": {
+      "method": "last low पर",
+      "description": "हमेशा बोलता हूँ last low को लगा देंगे - या फिर यह low के आसपास लगा सकते हैं। Example में 22 point का stop loss था।"
+    },
+    "targets": [
+      "Example में 22 point के stop loss पर 120 point का target मिला - लगभग 1:6 risk reward",
+      "Expiry के दिन trailing करते हुए चलें - 150-200 point वन वे में profit मिल सकता है",
+      "Risk reward at least 1:5 बान के चलते हैं"
+    ],
+    "exit_rules": [
+      "Scalping उस दिन का सिर्फ और सिर्फ - next दिन तक hold नहीं करेंगे",
+      "Expiry के दिन trailing करते हुए चलना है",
+      "अगर trailing भी hit होगा तो कहीं ना कहीं 150 point होगा"
+    ],
+    "risk_management": "इसको अल्टिमेटम की तरह ही use कीजिए अगर दूसरा entry ना मिले तो ही use कीजिए। बिगिनर्स इसको बिल्कुल avoid कीजिए। दो-तीन महीने SMC पर हाथ सेट हो जाए उसके बाद यहाँ पर आकर स्कैलपिंग कीजिए।",
+    "filters": [
+      "अगर change of character नहीं आया तो sniper scalp activate नहीं हुआ - entry मत लो",
+      "अगर break of structure नहीं हुआ 1 minute पर तो entry नहीं करेंगे",
+      "3 बजे 15 मिनट के बाद market यहाँ से reverse आ रहा है तो entry नहीं मिलेगा",
+      "Scalping को BTST मत करो - उस दिन का उस दिन",
+      "India VIX अगर high हो जाएगा तो strategy का stop loss बड़ा हो जाएगा - ऐसे में risk reward ठीक नहीं आता",
+      "बिगिनर्स इस strategy को बिल्कुल avoid करें",
+      "Normal SMC की तरह हर जगह support resistance नहीं ढूंढते - यहाँ कोई demand supply, order block कुछ नहीं देखना"
+    ],
+    "confidence": "HIGH",
+    "source_timestamps": [
+      "00:02:36",
+      "00:03:37",
+      "00:04:53",
+      "00:05:03",
+      "00:06:42",
+      "00:07:08",
+      "00:09:53",
+      "00:10:54",
+      "00:11:43",
+      "00:15:04",
+      "00:22:48",
+      "00:22:54",
+      "00:23:50",
+      "00:23:53",
+      "00:24:04",
+      "00:24:06",
+      "00:24:17",
+      "00:27:39",
+      "00:28:47"
+    ],
+    "direct_quotes": [
+      "आपको तभी स्नाइपर स्कैल लेना है जब आपको SMC का बड़ा time frame में कोई entry नहीं मिल रहा है",
+      "स्नाइपर scalps को अल्टिमेटम की तरह ही यूज कीजिए अगर दूसरा entry ना मिले तो ही यूज कीजिए",
+      "sniper scalping stop loss कितना है - हमेशा बोलता हूँ last low को लगा देंगे",
+      "22 point के एक्स्ट पे आपको 120 point मिल रहा है - लगभग 1:6",
+      "इसे कहते है sniper scalping जहाँ पे entry perfection पे आता है",
+      "कोई भी demand supply कुछ भी देख रहे कुछ नहीं दिख रहे हम हम बस एक support या resistance find कर रहे हैं इतना powerful strategy है",
+      "expiry के दिन जब sniper scalping मिलता है न भाई साब क्या बड़ा बड़ा profit मिलता है",
+      "scalping उस दिन का सिर्फ और सिर्फ",
+      "वन शॉट किल होता है",
+      "market जहाँ पे react करता है तो वो जो reaction आता है हम उसमें पैसा बनाने की कोशिश करते हैं"
+    ],
+    "notes": "यह strategy बिगिनर्स के लिए नहीं है। कम से कम 4-5 महीने SMC पर हाथ सेट हो जाए उसके बाद इस strategy को use करें। बहुत बार 4 दिन भी activate नहीं होता - patience बहुत important है। यह strategy Indian market पर काम करती है, US market पर नहीं। 6 महीने में 6 और advance strategies add होंगी इस chapter में।",
+    "source_video": "SniperScalping_A-Z"
+  },
+  {
+    "strategy_name": "SMC Unmitigated Zone Trading",
+    "instrument": "NIFTY / BANKNIFTY",
+    "timeframe": "15min",
+    "session": null,
+    "setup_conditions": [
+      "Unmitigated zone मतलब वो order block area जो अभी भी activate नहीं हुआ है — जहाँ पे price ने दोबारा retest नहीं किया है",
+      "Order block create हुआ है, institutes का buy या sell आया है, लेकिन दोबारा उसको retest नहीं किया है",
+      "जब price उस zone तक आने से पहले liquidity create करके आता है तो entry लेते हैं",
+      "अगर directly market आया और liquidity create नहीं किया तो यह perfect entry point नहीं है",
+      "Unmitigated zone से बड़ा rally बहुत rare scenarios पर होता है"
+    ],
+    "entry_trigger": {
+      "type": "BUY",
+      "candle_pattern": null,
+      "conditions": [
+        "Price order block area पर आए और पहले liquidity create करके आए",
+        "Zone को पहले retest नहीं हुआ हो (unmitigated हो)",
+        "Break of structure हुआ हो"
+      ],
+      "indicator_values": null
+    },
+    "stop_loss": {
+      "method": "Zone break",
+      "description": "अगर market zone को respect नहीं कर रहा है और उसको तोड़ रहा है तो SL"
+    },
+    "targets": [],
+    "exit_rules": [],
+    "risk_management": "Unmitigated zone में maximum बड़ा पैसा / बड़ा order रखेंगे। Mitigated zone में अगर फिर से आएगा तो छोटा सा quantity से trade लेंगे, बहुत low quantity पे लेंगे क्योंकि यह एक बार test हो चुका है।",
+    "filters": [
+      "अगर zone mitigated है (price एक बार already touch/react कर चुका है) तो वहाँ maximum बड़ा order नहीं लगाएंगे",
+      "अगर liquidity create किए बिना directly market आया तो entry नहीं लेंगे (pure SMC rule)",
+      "Inducement level अगर दो बार से ज्यादा respect कर दिया है तो उसको बिल्कुल नहीं देखेंगे"
+    ],
+    "confidence": "HIGH",
+    "source_timestamps": [
+      "00:01:03",
+      "00:02:07",
+      "00:02:28",
+      "00:03:51",
+      "00:04:21",
+      "00:04:50",
+      "00:07:23",
+      "00:07:36",
+      "00:08:48"
+    ],
+    "direct_quotes": [
+      "अन्मिटिगेटेड जोन मतलब हो गया हमारा वो एंट्री पॉइंट वो आडर ब्लॉक एरिया जो अभी भी एक्टिवेट नहीं हुआ है",
+      "वैसा एक zone, जहाँ पे order block create हुआ है, institutes का buy या sell आया है, लेकिन दोबारा उसको retest नहीं किया है",
+      "यह जौन पर प्राइस कभी भी react नहीं किया है तो यह हमारे लिए फ्रेश एंट्री वाला पॉइंट होगा",
+      "अन्मिटिगेटेड जोन से बड़ा रैली नहीं होता है बहुत रेयर के सिनारियों पर होता है इसलिए हम वहां पर छोटा क्वांटरी लेते हैं"
+    ],
+    "notes": "यह एक strategy है, यह एक price action है। Market यहाँ पे 100% तो follow करेगा यह हम बोल नहीं सकते, इसलिए SL लगाते हैं।",
+    "source_video": "Chapter_4_UnmitigatedZone_IndianStyle"
+  },
+  {
+    "strategy_name": "Indian Market SMC Quantity Deployment",
+    "instrument": "NIFTY / BANKNIFTY",
+    "timeframe": "15min",
+    "session": "12 बजे के बाद preferred",
+    "setup_conditions": [
+      "Indian market में SMC pure form में काम नहीं करता इसलिए inducement area पर भी trade लेना पड़ता है",
+      "Indian market सिर्फ 6.5 घंटे का session होता है, इसलिए compact और जल्दबाजी में trade होता है",
+      "Nifty 50 पर heavyweight stock (जैसे Reliance) में news आने पर market liquidity के बिना भी fast move कर सकता है",
+      "हर week expiry होती है Indian market में, इसलिए inducement area से बड़े players move ले जाते हैं"
+    ],
+    "entry_trigger": {
+      "type": null,
+      "candle_pattern": null,
+      "conditions": [
+        "Order block पर valid आने पर + liquidity create करके आने पर: 80-100% quantity deploy करेंगे",
+        "Inducement area के आसपास आने पर: 40-60% quantity deploy करेंगे",
+        "Directly order block के आसपास आने पर (no liquidity, no inducement): 10-20% quantity deploy करेंगे",
+        "Inducement area से पहले अगर liquidity भी मिल जाए तो 80% quantity तक भी deploy कर सकते हैं"
+      ],
+      "indicator_values": null
+    },
+    "stop_loss": {
+      "method": null,
+      "description": null
+    },
+    "targets": [
+      "Inducement area में entry लेने पर target: last high तक सिर्फ",
+      "Order block zone तक target देंगे"
+    ],
+    "exit_rules": [
+      "Inducement area में entry पर last high तक ही target रखेंगे, उसके ऊपर नहीं देंगे"
+    ],
+    "risk_management": "तीन rules: 80-100% quantity order block पर (liquidity के साथ आने पर); 40-60% quantity inducement area पर; 10-20% quantity अगर directly order block पर आए बिना liquidity और inducement के। Beginners 40% से start करें, profit होने पर 60% तक जा सकते हैं।",
+    "filters": [
+      "Inducement level दो बार से ज्यादा respect कर चुका हो तो उसको बिल्कुल नहीं देखेंगे",
+      "Order block के बिल्कुल near में अगर inducement area है तो वहाँ entry नहीं लेंगे",
+      "12 बजे से पहले inducement area पर trade करने पर probability कम होती है — 12 बजे से पहले amateurs वाला movement होता है जो sustainable नहीं होता",
+      "Inducement area एकदम order block के नज़दीक नहीं होना चाहिए"
+    ],
+    "confidence": "HIGH",
+    "source_timestamps": [
+      "00:13:32",
+      "00:13:44",
+      "00:13:50",
+      "00:14:14",
+      "00:19:09",
+      "00:19:14",
+      "00:28:32",
+      "00:29:13",
+      "00:29:25",
+      "00:30:05",
+      "00:32:37",
+      "00:33:01",
+      "00:33:34",
+      "00:35:54",
+      "00:36:01",
+      "00:36:16"
+    ],
+    "direct_quotes": [
+      "order block तो बहुत अच्छा एरिया है हमारे बाइंग के लिए लेकिन अगर इंडूसमेंट एरिया आएगा तो हम वहां पर हम अधे क्वांटिटी पर जरूर बाय करेंगे 50% वांटिटी पर जरूर वाई करेंगे",
+      "80-100% order block पे लेंगे, 40-60% inducement area के आसपास लेंगे",
+      "10-20% quantity अगर market directly एक order block के आसपास आ जाएगा, ना तो inducement create किया ना तो liquidity create किया",
+      "try कीजिए 12 बजे के बाद",
+      "12 बजे से पहले अगर होगा तो वो amateurs वाला एक movement होगा वो first half का movement है जो की sustainable नहीं होता है",
+      "inducement area से पहले अगर liquidity भी मिल गया आपको तो वो inducement area भी बहुत कमाल का होने वाला है तो वहाँ पे हम हो सकता है 80% quantity भी वहाँ पे deploy करते हैं"
+    ],
+    "notes": "Normally SMC में सिर्फ order block पे trade होता है। Indian market पे inducement पे भी trade लिया जाता है और कभी-कभी directly market आए तो भी 10-20% quantity के साथ trade लिया जाता है। यह Indian market adaptation है pure SMC का।",
+    "source_video": "Chapter_4_UnmitigatedZone_IndianStyle"
+  },
+  {
+    "strategy_name": "Advanced Trading Psychology Risk Management Framework",
+    "instrument": null,
+    "timeframe": null,
+    "session": null,
+    "setup_conditions": [
+      "80% of trading success depends on psychology, 10% on risk-reward, and only 10% on analysis and strategies",
+      "90% of trading game is psychology and risk-reward combined",
+      "Do not compare your P&L or trading results with anyone else — compare only with yourself (last week vs this week, last month vs this month)",
+      "Stop watching Instagram reels and social media overnight success stories — they corrupt your mind as a trader",
+      "Meditate or give your mind 5 to 10 minutes of calm before trading session begins",
+      "Set a realistic monthly return target of 20% to 50% for advanced/retail traders",
+      "Set a fixed monthly capital for trading — do not trade more or less than that capital",
+      "Define maximum monthly loss threshold first (think negative before positive)",
+      "Divide monthly loss threshold by number of trading days (approx 20-21 days) to get per-day loss capacity",
+      "If monthly loss quota is exhausted early (e.g., in 6-7 days), stop trading for the rest of the month",
+      "Never trade without a proper plan — entry, SL, target must all be pre-defined",
+      "SL must be defined in cash terms (rupees), not just in points",
+      "Quantity must be managed to match risk in rupees — do not widen stop loss to accommodate more risk, instead increase quantity keeping SL same",
+      "Unused daily loss capacity from days with no trades can be accumulated and used on high probability trade days (e.g., expiry day or Wednesday when momentum is visible)",
+      "On expiry day or high momentum days, risk 20-30% of accumulated profits along with base risk",
+      "Risk from profits: at least 25-30% of profits should be risked on high probability setups to grow account size",
+      "If you break your own rules, you cannot become a trader"
+    ],
+    "entry_trigger": {
+      "type": null,
+      "candle_pattern": null,
+      "conditions": [
+        "Only enter when a high probability trade is visible (e.g., SMC-based sniper scalp setup on expiry day)",
+        "Only increase position size (quantity) on high probability trades when unused loss capacity is available"
+      ],
+      "indicator_values": "SMC (Smart Money Concepts) mentioned as basis for high probability trade identification"
+    },
+    "stop_loss": {
+      "method": "Cash-based SL definition",
+      "description": "Trading mein SL ko cash se define karte hain — 5000 rupee risk on 50 point SL means quantity is calculated accordingly. To increase risk to 15000 rupees, keep SL at 50 points but triple the quantity (100 to 300 quantity). Never widen stop loss — always adjust quantity."
+    },
+    "targets": [
+      "Minimum 1.2x risk-reward ratio mentioned as base target",
+      "Target scales proportionally with quantity — if quantity is tripled, target reward triples too",
+      "Monthly realistic return target: 20% to 50% of capital"
+    ],
+    "exit_rules": [
+      "If monthly loss quota is fully used up, stop trading for the rest of the month — no exceptions",
+      "If daily loss limit is hit, do not take further trades that day"
+    ],
+    "risk_management": "Set fixed monthly capital. Divide maximum monthly loss by ~20 trading days to get daily loss capacity. Accumulate unused daily loss capacity for high probability days. Risk 20-30% of profits on high probability setups. Define SL in rupee terms not points. Increase quantity to scale risk, never widen SL. 3-4 months of following rules strictly required for consistent results.",
+    "filters": [
+      "Do not trade if monthly loss quota is already exhausted",
+      "Do not increase risk on normal/average probability trades — only on high probability setups",
+      "Do not widen stop loss to accommodate larger risk — wrong approach",
+      "Do not compare your results with other traders — leads to unrealistic targets and irrational decisions",
+      "Do not open Instagram or social media before or during trading",
+      "Do not trade without a pre-defined plan (capital, loss limit, entry, SL, target all pre-set)",
+      "Do not carry positions irrationally on expiry day out of revenge or greed"
+    ],
+    "confidence": "HIGH",
+    "source_timestamps": [
+      "00:01:15",
+      "00:01:21",
+      "00:01:29",
+      "00:04:39",
+      "00:07:13",
+      "00:07:45",
+      "00:12:55",
+      "00:13:38",
+      "00:15:07",
+      "00:15:37",
+      "00:19:15",
+      "00:19:19",
+      "00:20:00",
+      "00:20:29",
+      "00:21:39",
+      "00:23:22",
+      "00:24:43",
+      "00:25:28",
+      "00:26:35",
+      "00:27:04"
+    ],
+    "direct_quotes": [
+      "80% psychology hota hai ek trader ko successful banane mein aur 20% baaki rest of the things hota hai",
+      "90% trading ka game psychology aur risk reward ka hota hai",
+      "Trading mein SL ko cash se define karte hain — yeh aap bahut important hai",
+      "50 point pe aapka quantity zyada hai, toh profit bhi bahut bada aayega quantity ke hisaab se",
+      "100 ke jagah aap 300 quantity le lenge, aur stop loss aapka 50 point hi rahega",
+      "Agar yeh rules aap torenge, toh aap kabhi bhi trader nahi ban paayenge",
+      "Pehle negative sochiye, pehle galat sochiye — positive toh aa jaayega",
+      "At least aapko 25-30% profit ka risk lena chahiye — bare players 5-10% lete hain lekin humein 20-30-40% lena padta hai",
+      "3-4 mahine maine rules follow kiya, koi bhi mahine mujhe loss nahi hua. Ek mahine maine rules follow nahi kiya, aane wale 3 mahine mujhe loss hua",
+      "Never enter market without a proper plan",
+      "Agar aap khud apne khud ke rules par stick nahi karenge, market woh give you a shit — market aapko ek paisa nahi dene wala hai"
+    ],
+    "notes": "This chapter is entirely focused on trading psychology and money management — no technical chart strategy is taught. Teacher explicitly states this course is NOT for beginners but for retail advanced traders who already know market basics. Teacher shares personal experience of making 250% return but still losing money due to lack of psychological discipline. The risk management framework described (daily loss limits, accumulating unused capacity, scaling on high probability days) is the core actionable content of this chapter.",
+    "source_video": "AdvancePhychology"
+  },
+  {
+    "strategy_name": "Mini Jackpot Trade",
+    "instrument": "NIFTY",
+    "timeframe": null,
+    "session": "2:45 PM to 3:15 PM (golden period); analysis starts from 2:30 PM",
+    "setup_conditions": [
+      "Option sellers mindset ko tap karna padega - understand kab wo apna position square off kar rahe hain aur reverse position bana rahe hain",
+      "Option ka chart dekhna hai (not option chain) - jis instrument pe kaam karenge uska chart dekhna hai",
+      "Option ka chain dekhna hai - kahan pe OI build up hai, kahan pe nahi hai",
+      "Liquidity grab hona chahiye entry se pehle - ek bada movement aane se pehle liquidity grab bahut important hota hai",
+      "Reverse movement ka momentum dekhna hai - market agar niche aa raha hai to jackpot upside movement mein milega",
+      "Timing: mini jackpot 2:45 ke baad dekhne ko milega, max to max time 2:45 se 3:15 ke beech mein aata hai",
+      "Option premium ke key levels: 100 aur 50 - ye bahut kaam ke numbers hain",
+      "Jab option premium 85-95% erode ho jaye (100 rupee se 5-10 rupee aa jaye) tab option sellers profit book karke reverse side mein position banate hain",
+      "Option sellers call option resistance pe sell karte hain jahan option chart pe resistance hota hai"
+    ],
+    "entry_trigger": {
+      "type": "BUY",
+      "candle_pattern": null,
+      "conditions": [
+        "2:45 ke baad setup activate ho tab entry lena",
+        "Liquidity grab hone ke baad reverse movement mein entry",
+        "Option sellers ka profit booking aur reverse side position banana visible ho",
+        "2:30 mein setup ho jaye to quantity thoda kam rakhenge",
+        "2:50, 2:55, 3:00 baje ho raha hai to full quantity se entry"
+      ],
+      "indicator_values": null
+    },
+    "stop_loss": {
+      "method": "mentioned as mandatory",
+      "description": "SL must hai - sab kuch random of probability hai, 100% kuch nahi hai"
+    },
+    "targets": [],
+    "exit_rules": [
+      "Option sellers ki tarah 50-60% profit milne par book kar lo"
+    ],
+    "risk_management": "Zyada quantity use karne se shuruaat mein bahut dar lagega, poora movement catch nahi kar paoge. Quantity control karna zaroori hai.",
+    "filters": [
+      "Mini jackpot 2:45 se pehle nahi aata - pehle entry mat karo",
+      "3:15 ke baad mini jackpot nahi milta",
+      "Random trading mat karo - 2 baje, 3 baje koi bhi option lete rehna jackpot nahi deta",
+      "Zero ka wait mat karo - sirf amateur sellers zero ka wait karte hain"
+    ],
+    "confidence": "MEDIUM",
+    "source_timestamps": [
+      "00:05:59",
+      "00:06:03",
+      "00:06:08",
+      "00:07:49",
+      "00:07:52",
+      "00:07:53",
+      "00:08:01",
+      "00:08:34",
+      "00:09:25",
+      "00:09:55",
+      "00:10:02",
+      "00:10:05",
+      "00:10:07",
+      "00:10:09",
+      "00:10:25",
+      "00:10:28",
+      "00:10:34",
+      "00:26:40",
+      "00:26:42",
+      "00:26:48",
+      "00:26:50"
+    ],
+    "direct_quotes": [
+      "mini jackpot aapko 2.45 ke baad dekhne ko milega, yaad rakhiye, na pehle, na baad mein",
+      "3 baje ke baad max to max milta hai, max to max time 2.45 se aa jaata hai, 2.45 se 3.15 ke beech mein, ye aadha ghanta golden period hai, mini jackpot ka golden period hai",
+      "option sellers ka mindset pe tap karna padega, option ka chart, option ka chain, ye teen cheez humein dekhna hai",
+      "ek bada movement aane se pehle, ek bada aur fast movement aane se pehle, ek liquidity grab bahut important ho jaata hai",
+      "reverse movement, market agar niche aa raha hai, to jo jackpot niklega, wo fast, upside movement mein niklega",
+      "ye do number ko yaad rakhega 100 aur 50 ye bahut kaam ka number hone wala hai",
+      "SL must hai, sab kuch random of probability hai, to 100% kuch nahi hai"
+    ],
+    "notes": "Teacher ne bataya ki unhone pichle 30-40 expiries mein ye formula use kiya hai. Teacher ne warn kiya ki do din profit hua matlab teesra din bhi hoga aisa nahi hai. Ye educational purpose ke liye hai - DISCLAIMER visible tha charts par. Full jackpot mainly monthly expiry mein aata hai; weekly mein bahut kam hota hai.",
+    "source_video": "Chapter_2_HowToCatchJackpotExpiry"
+  },
+  {
+    "strategy_name": "Full Jackpot Trade",
+    "instrument": "NIFTY",
+    "timeframe": "15min",
+    "session": "Market open se hi trending market hogi",
+    "setup_conditions": [
+      "Mainly monthly expiry mein full jackpot aata hai",
+      "Bahut important level ka breakout ya breakdown ho raha ho - pura mahina ek range mein raha aur monthly expiry mein breakout ya breakdown ho",
+      "Daily time frame mein SMC ka order block ke aas paas market ho aur monthly expiry bhi ho",
+      "Daily time frame mein SMC order block ke paas shooting star type negativity show ho rahi ho",
+      "Ya range ke upper end mein rukne ke baad breakout aa raha ho",
+      "Full jackpot hoga to shuru se hi trending market ho jayega"
+    ],
+    "entry_trigger": {
+      "type": "BUY",
+      "candle_pattern": null,
+      "conditions": [
+        "15 minutes ke upar jaise niklega hum buy karenge"
+      ],
+      "indicator_values": null
+    },
+    "stop_loss": {
+      "method": "mentioned as mandatory",
+      "description": "SL must hai"
+    },
+    "targets": [],
+    "exit_rules": [],
+    "risk_management": null,
+    "filters": [
+      "Full jackpot weekly mein bahut kam hota hai"
+    ],
+    "confidence": "LOW",
+    "source_timestamps": [
+      "00:03:04",
+      "00:03:10",
+      "00:03:13",
+      "00:03:17",
+      "00:03:21",
+      "00:03:24",
+      "00:03:29",
+      "00:03:33",
+      "00:03:39",
+      "00:03:43",
+      "00:03:47",
+      "00:03:51",
+      "00:03:55",
+      "00:04:01",
+      "00:04:47",
+      "00:04:48",
+      "00:04:50",
+      "00:04:20"
+    ],
+    "direct_quotes": [
+      "mainly monthly expiry mein full jackpot aata hai",
+      "bahut important koi level, breakout ya breakdown ho raha hai, maan lete pura mahina ek range mein raha aur monthly expiry mein usko breakout ya breakdown ho raha hai, to full jackpot aata hai",
+      "daily time frame mein SMC ka order block ke aas paas hai hum, aur monthly expiry bhi hai, to is jagah pe hum full jackpot expect kar sakte hain",
+      "full jackpot hoga to shuru se hi trending market ho jayega, to 15 minute ka setup aap use kar sakte hain, ki 15 minutes ke upar jaise niklega, hum buy karenge",
+      "full jackpot weekly mein bahut kam hota hai"
+    ],
+    "notes": "Full jackpot ka koi fixed formula nahi hota - price interpret karke dekhna padega. SMC (Smart Money Concepts) ka use kiya jaata hai is setup mein.",
+    "source_video": "Chapter_2_HowToCatchJackpotExpiry"
+  },
+  {
+    "strategy_name": "Semi Jackpot Trade",
+    "instrument": "NIFTY",
+    "timeframe": null,
+    "session": "2:00 PM ke baad (second half)",
+    "setup_conditions": [
+      "Options ka chart dekhna padega - kya long unwinding ho rahi hai ya short covering ho rahi hai",
+      "Pura mahina market down tha, market ruk raha, ek hafte se market ruk gaya, aur expiry ke din upside break karne ki koshish kar raha hai - to short covering ka rally aa sakta hai",
+      "Second half mein koi breakout ya breakdown ho raha hai ki nahi - yahi dekhte hain",
+      "Short covering ya long unwinding agar hota hai to 2 baje ke baad hi mainly aata hai",
+      "Semi jackpot monthly aur weekly dono mein ho jaata hai"
+    ],
+    "entry_trigger": {
+      "type": "BUY",
+      "candle_pattern": null,
+      "conditions": [
+        "2 baje ke baad koi proper major breakout ya breakdown ho raha hai to wahan pe trade karte hain"
+      ],
+      "indicator_values": null
+    },
+    "stop_loss": {
+      "method": "mentioned as mandatory",
+      "description": "SL must hai"
+    },
+    "targets": [],
+    "exit_rules": [],
+    "risk_management": null,
+    "filters": [
+      "Semi jackpot saade barah baje se nahi aata",
+      "Semi jackpot baade baje se nahi aata - 2 baje ke baad hi maximum time aane ki koshish karta hai"
+    ],
+    "confidence": "LOW",
+    "source_timestamps": [
+      "00:04:07",
+      "00:04:09",
+      "00:04:11",
+      "00:04:13",
+      "00:04:17",
+      "00:04:18",
+      "00:04:20",
+      "00:04:26",
+      "00:04:28",
+      "00:04:32",
+      "00:04:35",
+      "00:04:37",
+      "00:04:54",
+      "00:04:56",
+      "00:04:58",
+      "00:05:01",
+      "00:05:18",
+      "00:05:20",
+      "00:05:22",
+      "00:05:25"
+    ],
+    "direct_quotes": [
+      "semi jackpot ke liye aapko options ka chart dekhna padega, kya long unwinding ho rahi hai, ya short covering ho rahi hai, yeh dono mein se semi jackpot aata hai",
+      "semi jackpot pe hum kya dekhte hain, ki second half mein koi breakout ya breakdown ho raha hai ki nahi",
+      "covering ya long unwinding agar hota hai, to 2 baje ke baad hi mainly aata hai",
+      "semi jackpot baade baje se nahi aata, 13 baje, 2 baje ke baad hi maximum time aane ki koshish karta hai",
+      "semi jackpot monthly aur weekly dono mein ho jaata hai"
+    ],
+    "notes": "Semi jackpot ke liye options ka chart dekhna zaroori hai, option chain nahi. Short covering ya long unwinding identify karna padta hai.",
+    "source_video": "Chapter_2_HowToCatchJackpotExpiry"
+  },
+  {
+    "strategy_name": "Pivot Point Breakout with Range",
+    "instrument": "NIFTY",
+    "timeframe": "15 min",
+    "session": null,
+    "setup_conditions": [
+      "market में अगर तीन से चार 15 minute का candle pivot के सामने रुख गया, उसके बाद जिस भी side तोड़ेगा, हम उस side का trade लेंगे",
+      "pivot के सामने, मतलब pivot को, pivot के पास body लगाता हुआ — at least चार candle रुखना जरूरी है",
+      "चार candle रुखना मतलब one hour time",
+      "range के बिना, price action reversal में नहीं आता है — इसलिए range जरूरी है",
+      "यह pivot वाला setup last priority होना चाहिए — सबसे पहला priority SMC, next priority institutional candle setup, फिर sniper scalping, उसके बाद pivot",
+      "अगर SMC, institutional candle, sniper scalping — तीनों में से कुछ नहीं मिल रहा है, तो pivot setup use करेंगे"
+    ],
+    "entry_trigger": {
+      "type": "BUY or SELL — जिस भी side breakout या breakdown दे",
+      "candle_pattern": null,
+      "conditions": [
+        "चार candle pivot के सामने range बनाए — pivot के पास body लगाता हुआ",
+        "जिस भी side तोड़ेगा — breakout या breakdown — उस side का trade लेंगे",
+        "अगर price action आ रहा है और चार candle रुखे बिना price action बना के pivot के उपर निकलेगा, तो वहाँ पे buy करेंगे",
+        "pivot के सामने एक candle stick या दो candle stick को देखते हुए trade लेना गलत है — minimum चार candle range जरूरी है"
+      ],
+      "indicator_values": "Pivot Points indicator — middle pivot (P) को white color में रखें क्योंकि वह central range है, support या resistance नहीं"
+    },
+    "stop_loss": {
+      "method": "pivot based",
+      "description": "SL को pivot के नीचे लगाएंगे — possibility होगा यह pivot के नीचे ना निकले यहाँ से घूम जाए — अगर SMC setup है तो pivot को SL के रूप में use करेंगे"
+    },
+    "targets": [
+      "next pivot तक का target",
+      "next pivot के आसपास जाने के बाद book करें",
+      "risk reward: 1 is to 1 या 1 is to 2 मिल जाता है"
+    ],
+    "exit_rules": [
+      "next pivot के आसपास आधा quantity book करें ताकि market sideways भी हो जाए तो नुकसान ना हो"
+    ],
+    "risk_management": "pivot setup में 1 is to 1 या 1 is to 2 risk reward मिलता है — अगर risk reward ठीक नहीं है तो trade नहीं लेंगे — risk reward से उपर कुछ नहीं होता, वो भगवान होता है",
+    "filters": [
+      "pivot के सामने risk reward ठीक नहीं है तो trade नहीं लेंगे",
+      "confusing scenario में trade नहीं लेंगे — जैसे दो candle ऊपर, दो candle नीचे — एक side का range नहीं बन रहा",
+      "pivot के सामने एक या दो candle देखकर trade नहीं लेंगे",
+      "pivot reversal में trade नहीं लेंगे — सिर्फ breakout या breakdown पर",
+      "one minute timeframe का pivot avoid करें",
+      "one day timeframe का pivot avoid करें — बहुत बड़ा range आ जाएगा",
+      "अगर सामने pivot resistance खड़ा है तो buy trade नहीं लेंगे जब तक candle उसके ऊपर close ना करे",
+      "pivot के सामने जाते ही कोई भी candlestick pattern देखकर तुरंत trade नहीं लेंगे"
+    ],
+    "confidence": "HIGH",
+    "source_timestamps": [
+      "00:13:29",
+      "00:13:51",
+      "00:16:36",
+      "00:17:25",
+      "00:18:30",
+      "00:18:59",
+      "00:19:15",
+      "00:19:45",
+      "00:20:03",
+      "00:20:33",
+      "00:24:35",
+      "00:24:39",
+      "00:25:09",
+      "00:37:30",
+      "00:38:04",
+      "00:38:15",
+      "00:40:37",
+      "00:42:45",
+      "00:42:55",
+      "00:50:32"
+    ],
+    "direct_quotes": [
+      "market में अगर तीन से चार परना मीट का candle pivot के सामने रुख गया, उसके बाद जिस भी side तोड़ेगा, हम उस side का trade लेंगे",
+      "चार candle रुखना मतलब, one hour time",
+      "range के बिना, price action reversal में नहीं आता है",
+      "pivot को as a stop और as a target use करता है",
+      "हम pivot को last पे use करेंगे",
+      "सबसे पहला priority SMC, next priority institutional candle setup, फिर sniper scalping, उसके बाद हम pivot",
+      "pivot का जो level है वह magnet level है — price बहुत हद तक pivot तक जाने की कोशिश करता है",
+      "pivot के सामने एक candle stick को देखता हुआ या दो candle stick को देखता हुआ आपने trade ले लिया — यह वाला mistake कभी repeat मत कीजिएगा",
+      "risk reward अगर आपका ठीक नहीं रहेगा — वो भगवान होता है — वो SMC BBC भी उपर हो जाता है",
+      "मैं personally आपको recommend करूंगा 15 minutes और one hour — यह दो timeframe",
+      "one minute को बिल्कुल avoid कीजिए, one minute का pivots भी जो निकल के आया avoid कीजिए"
+    ],
+    "notes": "यह pivot setup last priority है — institutes pivot को nakedly entry के लिए नहीं, बल्कि stop और target के रूप में use करते हैं। Pivot को SMC entry के साथ target और SL के रूप में use करना ज्यादा recommended है। Pivot settings में 'two days' mode रखें — back test के लिए teacher ने 40 days किया था लेकिन actual trading के लिए 'two days' recommend किया। Middle pivot (P) को white color में रखें। Bank Nifty, Fin Nifty और Nifty तीनों में अच्छा काम करता है।",
+    "source_video": "PowerOfPivotPoints"
+  },
+  {
+    "strategy_name": "Pivot as Target and SL with SMC",
+    "instrument": "NIFTY",
+    "timeframe": "15 min",
+    "session": null,
+    "setup_conditions": [
+      "SMC setup activate हो — order block area से 15 minute का setup",
+      "pivot को entry के लिए नहीं, बल्कि target और SL के लिए use करना है",
+      "अगर SMC method आ जा रहा है, तो वहाँ पर और entry method यूज़ ना करके, pivot को target और SL के लिए यूज़ करेंगे"
+    ],
+    "entry_trigger": {
+      "type": "BUY or SELL — SMC setup के basis पर",
+      "candle_pattern": null,
+      "conditions": [
+        "SMC setup से entry लेंगे",
+        "pivot को देखकर target और SL decide करेंगे",
+        "pivot खड़ा है — यहाँ से कुछ market में reaction होगा — उसके लिए ready रहें"
+      ],
+      "indicator_values": "Pivot Points — SMC order block के साथ combine करके use करें"
+    },
+    "stop_loss": {
+      "method": "pivot based SL",
+      "description": "SL को pivot के नीचे लगाएंगे — अगर pivot बहुत दूर है तो उतना दूर SL नहीं लगाएंगे — pivot के नीचे ना निकले इस possibility के basis पर SL लगाएंगे"
+    },
+    "targets": [
+      "next pivot तक का target",
+      "pivot के आसपास आने के बाद profit book करें"
+    ],
+    "exit_rules": [
+      "next pivot के आसपास target book करें"
+    ],
+    "risk_management": "अगर pivot बहुत दूर है तो SL वहाँ तक नहीं लगाएंगे — risk reward maintain करना जरूरी है",
+    "filters": [
+      "अगर SMC setup मिल रहा है तो pivot को entry के लिए use नहीं करेंगे — सिर्फ target और SL के लिए"
+    ],
+    "confidence": "MEDIUM",
+    "source_timestamps": [
+      "00:17:46",
+      "00:49:46",
+      "00:50:02",
+      "00:50:32",
+      "00:50:47",
+      "00:51:17",
+      "00:51:22"
+    ],
+    "direct_quotes": [
+      "institutes जो होता है, nakedly price action के, nakedly pivot के ऊपर price action पे trade नहीं करता, वो pivot को as a stop और as a target use करता है",
+      "अगर SMC method आ जा रहा है, तो वहाँ पर और entry method यूज़ ना करके, आप उसको target और SL के लिए यूज़ करेंगे",
+      "SL को यहाँ पर लगा देंगे — possibility होगा यह pivot के नीचे ना निकले यहाँ से घूम जाए"
+    ],
+    "notes": "यह combination — institutional price action plus pivot — teacher का primary recommended approach है। Pivot को standalone entry tool के रूप में नहीं, बल्कि SMC/institutional candle setup के साथ target और SL tool के रूप में use करना ज्यादा effective बताया गया है।",
+    "source_video": "PowerOfPivotPoints"
+  },
+  {
+    "strategy_name": "Advanced Candlestick Reading with SMC",
+    "instrument": null,
+    "timeframe": "15min (mentioned as example)",
+    "session": null,
+    "setup_conditions": [
+      "SMC comes first — candlestick comes later. पहले आपको SMC देखना है उसके बाद candlestick देखना है",
+      "Candlesticks को सिर्फ और सिर्फ अपने zone के सामने देखना है — candles अगर हमारे zone पर नहीं बनेगा we are going to ignore",
+      "तीन तरह का ही candlestick होता है: buyer strong, seller strong, neutral",
+      "Market का structure पहले देखो — market किस तरफ जाने की कोशिश कर रहा है",
+      "Level already tested है या नहीं यह देखना जरूरी है",
+      "Market का highs constantly नीचे आ रहा है तो trend negative है",
+      "Candle की closing के बाद ही trade लेना है — कोई भी candle closing के पहले नहीं देखेंगे"
+    ],
+    "entry_trigger": {
+      "type": "BUY",
+      "candle_pattern": "Marubozo (buyer strong candle) at support zone",
+      "conditions": [
+        "Support zone पर buyer strong candle (marubozo) बनना चाहिए",
+        "Sellers उस zone पर बिल्कुल भी activated नहीं होने चाहिए",
+        "Buyers पूरी तरीके से dominate कर रहे हों support area से",
+        "अगर candle के ऊपर next candle green बनाए और body के ऊपर close दे तो buying confirm",
+        "थोड़ा ऊपर body — मतलब candle body के थोड़ा ऊपर entry लेनी है"
+      ],
+      "indicator_values": null
+    },
+    "stop_loss": {
+      "method": "Below candle low",
+      "description": "SL 1-1 भी आ रहा है — hammer के नीचे SL, और जब तक high के ऊपर नहीं निकलेगा तब तक market पे buying pressure नहीं generate होगा"
+    },
+    "targets": [
+      "Target resistance zone तक — अगर high break करेगा तो resistance तक जाएगा",
+      "Bank Nifty में example: 200 point (mentioned as example only)"
+    ],
+    "exit_rules": [
+      "अगर candle के नीचे जाएगा तो तुरंत short कर देंगे"
+    ],
+    "risk_management": "Risk reward देखना जरूरी है — अगर high नज़दीक है तो trade नहीं लेना, तो आप तो वहाँ पे बुरी तरीके से फँस जाएंगे",
+    "filters": [
+      "Hammer candle पर directly buy नहीं करना अगर: level बार-बार tested हो, market downtrend में हो, highs constantly नीचे आ रहे हों, nearby high हो",
+      "अगर level एक बार, दो बार, तीन बार tested है तो वह level weak है — वहाँ पर hammer पर buy नहीं करना",
+      "Semi strong buyer candle (hammer) पर buy नहीं करना जब sellers already एक बार try कर चुके हों",
+      "Candlestick को सिर्फ देखकर trade नहीं लेना — zone के बिना कोई भी candle के base पे trade नहीं लेंगे",
+      "SMC structure देखे बिना trade नहीं लेना",
+      "जब तक high के ऊपर market नहीं निकलेगा तब तक buying pressure generate नहीं होगा — तब तक buy नहीं करना"
+    ],
+    "confidence": "MEDIUM",
+    "source_timestamps": [
+      "00:04:33",
+      "00:04:41",
+      "00:04:49",
+      "00:05:25",
+      "00:05:32",
+      "00:06:09",
+      "00:17:00",
+      "00:17:37",
+      "00:18:14",
+      "00:18:36",
+      "00:19:26",
+      "00:20:11",
+      "00:21:05",
+      "00:21:37",
+      "00:22:36",
+      "00:23:15",
+      "00:25:14",
+      "00:34:13"
+    ],
+    "direct_quotes": [
+      "candlesticks अगर हमारे zone पर नहीं बनेगा we are going to ignore",
+      "candlestick comes later, SMC comes first — SMC हमेशा superior रहेगा",
+      "candles अपने आप में नहीं बोलता, zone बोलता है — candle आपको signal दे रहा है zone बोलता है",
+      "analysis करना और trade लेने में बहुत अंतर होता है",
+      "hammer कहीं भी बन जाएगा तो हम buy करेंगे — यह basic की बात नहीं कर रहे है",
+      "यह level बार बार tested है, level weak है",
+      "जब तक high के ऊपर नहीं निकलेगा, तब तक market पे buying pressure नहीं generate होगा",
+      "sellers यहाँ पर already एक बार, दो बार, तीन बार — यह level tested है, level weak है",
+      "तीन तरा का ही candlestick होगा — buyer strong, seller strong, neutral"
+    ],
+    "notes": "यह chapter advance level candlestick reading के बारे में है। Teacher ने explicitly कहा कि पहले जो आप जानते हैं (hammer पर buy, shooting star पर sell) उसे एक घंटे के लिए भूल जाएं। Hammer candle कभी-कभी sell signal भी generate कर सकता है context के हिसाब से। यह standalone candlestick strategy नहीं है — यह SMC के साथ combine करके use करने की strategy है।",
+    "source_video": "Chapter_1_Candlestick-P1"
+  },
+  {
+    "strategy_name": "Options Chart Based Entry Exit Method",
+    "instrument": "BANKNIFTY",
+    "timeframe": "15min",
+    "session": null,
+    "setup_conditions": [
+      "Analysis (SMC, entry, exits) करो index के chart पे",
+      "Entry के time पे options का chart खुला होना चाहिए",
+      "जो instrument पे trade कर रहे हैं, जो strike price पे trade कर रहे हैं, उसका chart देखना पड़ेगा",
+      "Options का chart पे भी एक support चाहिए या फिर एक SR वाला zone — एक point of impact होना चाहिए entry के time पे",
+      "Index और options का chart दोनों synchronize होने चाहिए — spot पे hammer बन रहा है तो option में भी bullish candle होना चाहिए",
+      "Options जब गिरेगा spot से ज्यादा गिरेगा, जब भागेगा spot से ज्यादा भागेगा — क्योंकि options में time value रहता है",
+      "Option का chart support के थोड़ा सा नीचे तक आ सकता है — time decay की वजह से"
+    ],
+    "entry_trigger": {
+      "type": "BUY",
+      "candle_pattern": "hammer",
+      "conditions": [
+        "Option का chart support के ऊपर जाएगा तो buy करेंगे",
+        "Support के आसपास जैसे आएगा तब buy नहीं करेंगे — support के थोड़ा सा नीचे से जैसे ऊपर जाएगा तो perfect entry आ जाएगा",
+        "Options के chart पे liquidity grab होने के बाद entry करें",
+        "जहां पर entry करें उस candle के नीचे SL लगाएं"
+      ],
+      "indicator_values": null
+    },
+    "stop_loss": {
+      "method": "Candle low based",
+      "description": "जहां से घूमेगा उसके नीचे SL लगाएंगे — options के chart पे ही लगाएंगे, जो liquidity grab हो चुका उस candle के नीचे लगाकर रखें"
+    },
+    "targets": [
+      "Options के chart पे next resistance के थोड़ा सा नीचे — अगर 100 में resistance है तो 96-95 में book करना पसंद करेंगे",
+      "अगर spot के chart पर target तक पहुंचने से पहले pivot आ जाता है तो वहां पर 50% से ज्यादा quantity book करके बाकी को trail करें"
+    ],
+    "exit_rules": [
+      "Options के chart पे next resistance से थोड़ा पहले (4-5 points नीचे) exit करें क्योंकि कभी कभी 98 से घूम जाता है",
+      "अगर spot के chart पर pivot आ जाता है तो वहां पर 50% से ज्यादा quantity book करके बाकी को hold करें",
+      "Expiry के दिन यह method use नहीं करना है"
+    ],
+    "risk_management": "Perfect entry चाहिए तो 10 में से तीन-चार बार miss होगा, लेकिन जो 6-7 बार मिलेगा उसमें 1:2 से 1:5 या 1:7 तक R:R मिलेगा",
+    "filters": [
+      "Expiry के दिन यह method follow नहीं करना है",
+      "जब India VIX extreme रहता है — 19 या 22 चला गया — उस दिन थोड़ा दिक्कत आता है",
+      "Spot पे hammer बन रहा है लेकिन option में shooting star बन रहा है — यह गलत है, दोनों synchronize होने चाहिए",
+      "Option का chart support को नहीं तोड़ रहा है तो वहां पर आधा quantity लेना है या थोड़ा wait करना है",
+      "अगर option के chart पर कोई last support नहीं है (fresh support है, कोई POI नहीं है) तो movement उतना अच्छा नहीं मिलेगा",
+      "Stock options को उतना importance नहीं दिया जाता क्योंकि stock पे liquidity बहुत कम रहता है as compared to index"
+    ],
+    "confidence": "HIGH",
+    "source_timestamps": [
+      "00:02:54",
+      "00:06:06",
+      "00:06:10",
+      "00:06:14",
+      "00:06:32",
+      "00:07:02",
+      "00:07:36",
+      "00:07:41",
+      "00:07:45",
+      "00:08:04",
+      "00:08:20",
+      "00:08:30",
+      "00:08:41",
+      "00:08:45",
+      "00:09:49",
+      "00:12:22",
+      "00:12:38",
+      "00:15:29",
+      "00:15:41",
+      "00:19:26",
+      "00:28:33",
+      "00:31:51",
+      "00:32:02"
+    ],
+    "direct_quotes": [
+      "entry के time में options का chart superior रहता है",
+      "analysis के time पे index का chart आपके पास superior होगा",
+      "जब आप entry करेंगे तब आपके पास options का chart खुला होना चाहिए",
+      "option का chart ये support के ऊपर जाएगा तो आप buy करेंगे क्योंकि नहीं तो आपको दिक्कत आ सकता है ये चीज fake out हो सकता है",
+      "options के chart पे भी एक support चाहिए या फिर एक SR वाला zone — एक price of impact — point of impact वो वाला zone हमें चाहिए entry के time पे",
+      "SL हम जहां से घूमेगा उसके नीचे लगाएंगे — options के chart पे हम लगा देंगे",
+      "target जो होगा next resistance के थोड़ा सा नीचे — अगर सौ में resistance है तो आप 96-95 में exit करना चाहेंगे",
+      "expiry के दिन आपको ये method use नहीं करना है",
+      "options के chart पर हमेशा liquidity grab पे आप buy करें",
+      "अगर spot के chart पर pivot आ जाता है तो वहां पर 50% से ज्यादा quantity book करके बाकी को trail करें",
+      "दोनों को synchronize होना चाहिए — आपका spot पे hammer बन रहा है लेकिन option में shooting star बन रहा है वो थोड़ा दिक्कत आ जाएगा"
+    ],
+    "notes": "Teacher ने कहा कि यह method उन्होंने पिछले दो साल में discover किया है और 90% time work करता है। Teacher ने यह भी कहा कि इस method को हर किसी के साथ share मत कीजिए क्योंकि अगर बहुत ज्यादा लोग जान जाएंगे तो यह work करना बंद हो जाएगा। यह method expiry के दिन और extreme India VIX (19-22) पर काम नहीं करता।",
+    "source_video": "Entry_SL_Target"
+  },
+  {
+    "strategy_name": "Trend Direction Candle Pattern",
+    "instrument": "NIFTY",
+    "timeframe": null,
+    "session": null,
+    "setup_conditions": [
+      "चेंज ऑफ कैरेक्टर के साथ जैसे डाउन ट्रेन पर शिफ्ट हो गया मार्केट",
+      "अब आपको सिर्फ और सिर्फ टॉप में शूटिंग स्टार ढूनना है",
+      "नीचे में हैमर नहीं ढूनना है — नीचे में हैमर अगर आपको मिलेगा भी तो वो कम काम करेगा",
+      "अप ट्रेंड में हर एक पुल बैक पर हैमर ढूनना है",
+      "डाउन ट्रेंड में हर एक पुल बैक पर शूटिंग स्टार ढूनना है"
+    ],
+    "entry_trigger": {
+      "type": "SELL",
+      "candle_pattern": "Shooting Star",
+      "conditions": [
+        "मार्केट डाउन ट्रेंड में हो",
+        "चेंज ऑफ कैरेक्टर के बाद डाउन ट्रेंड confirm हो",
+        "टॉप पर शूटिंग स्टार आए तब ट्रेड लेना है",
+        "कैंडल के बेसिस पर ट्रेड में लेना है और तब आप स्विंग के नीचे ट्रेड करेंगे"
+      ],
+      "indicator_values": null
+    },
+    "stop_loss": {
+      "method": "swing based",
+      "description": "स्विंग के नीचे ट्रेड करेंगे"
+    },
+    "targets": [],
+    "exit_rules": [],
+    "risk_management": null,
+    "filters": [
+      "डाउन ट्रेंड में नीचे हैमर पर बाय नहीं करना — वो कम काम करेगा"
+    ],
+    "confidence": "MEDIUM",
+    "source_timestamps": [
+      "00:00:31",
+      "00:01:08",
+      "00:01:57"
+    ],
+    "direct_quotes": [
+      "चेंज ऑफ कैरेक्टर के साथ जैसे डाउन ट्रेन पर शिफ्ट हो गया मार्केट अब आपको सिर्फ और सिर्फ टॉप में शूटिंग स्टार ढूनना है नीचे में हैमर नहीं ढूनना है",
+      "रिफ्रेस के बाद आपको क्लॉयल बैठा बॉटम मतलब हर एक पूल बैक पर हमट ढूनना है अप ट्रेमेंट ओर डाउन ट्रेन में",
+      "कैंडल के बेसिस पर ट्रेड में लेना है और तब आप स्विंग के नीचे ट्रेड करेंगे"
+    ],
+    "notes": null,
+    "source_video": "Chapter_3_CandlesticksProTips_Tricks"
+  },
+  {
+    "strategy_name": "Resistance Test Shooting Star",
+    "instrument": "NIFTY",
+    "timeframe": null,
+    "session": null,
+    "setup_conditions": [
+      "रेजिस्टेंस को तीन बार टेस्ट कर दिया है",
+      "अब चौथी बार अगर शूटिंग स्टार आएगा तो आपको कैंडल के बेसिस पर ट्रेड में लेना है",
+      "सपोर्ट को तीन बार टेस्ट कर चुका है — अब यहां पर हैमर आए तो बाय करना है"
+    ],
+    "entry_trigger": {
+      "type": "SELL",
+      "candle_pattern": "Shooting Star",
+      "conditions": [
+        "रेजिस्टेंस को तीन बार टेस्ट हो चुका हो",
+        "चौथी बार शूटिंग स्टार बने",
+        "कैंडल के बेसिस पर ट्रेड लेना है"
+      ],
+      "indicator_values": null
+    },
+    "stop_loss": {
+      "method": "swing based",
+      "description": "स्विंग के नीचे ट्रेड करेंगे"
+    },
+    "targets": [],
+    "exit_rules": [],
+    "risk_management": null,
+    "filters": [
+      "हैमर के ऊपर सीधे बाय नहीं करना है जब तक स्विंग high नहीं टूटता"
+    ],
+    "confidence": "MEDIUM",
+    "source_timestamps": [
+      "00:01:52",
+      "00:01:57",
+      "00:02:04",
+      "00:02:09"
+    ],
+    "direct_quotes": [
+      "रेजिस्टेंट है यहां पर मान लीजिए तीन बार तीन बार इसको टेस्ट कर दिया है अब चौथी बार अगर शूटिंग स्टार आएगा तो आपको कैंडल के बेसिस पर ट्रेड में लेना है और तब आप स्विंग के नीचे ट्रेड करेंगे"
+    ],
+    "notes": null,
+    "source_video": "Chapter_3_CandlesticksProTips_Tricks"
+  },
+  {
+    "strategy_name": "Hammer Candle Color Entry",
+    "instrument": "NIFTY",
+    "timeframe": null,
+    "session": null,
+    "setup_conditions": [
+      "हैमर बन रहा है तो उसके ऊपर बाय करना है",
+      "अगर वह रेड कलर का हैमर आ रहा है तो उसके ऊपर कैंडल break होने पर खरीदेंगे",
+      "अगर वह ग्रीन कलर का हैमर हो रहा है तो उसके ऊपर जैसे निकलेगा बाय करेंगे",
+      "ग्रीन कलर का हैमर — कैंडल के ऊपर closing के बाद बाय कर सकते हैं"
+    ],
+    "entry_trigger": {
+      "type": "BUY",
+      "candle_pattern": "Hammer",
+      "conditions": [
+        "अगर रेड कलर का हैमर है तो उसके ऊपर कैंडल break होने पर entry",
+        "अगर ग्रीन कलर का हैमर है तो उसके ऊपर जैसे निकलेगा entry",
+        "ग्रीन कलर का हैमर — कैंडल के ऊपर closing के बाद entry"
+      ],
+      "indicator_values": null
+    },
+    "stop_loss": null,
+    "targets": [],
+    "exit_rules": [],
+    "risk_management": null,
+    "filters": [
+      "अगर ग्रीन कलर का ऊपर से नेगेटिव कैंडल आ रहा है, कैंडल pin down लंबा बना रहा है — तो सोचना पड़ेगा"
+    ],
+    "confidence": "MEDIUM",
+    "source_timestamps": [
+      "00:04:36",
+      "00:04:42",
+      "00:04:49",
+      "00:04:57",
+      "00:05:03"
+    ],
+    "direct_quotes": [
+      "अगर हैमर बन रहा है तो हमना कि ऊपर आपको अगर बाय करना भी है थे और जाकर आपको बाइट करना है",
+      "वह रेट कलर का हम आ रहा है तो उसके ऊपर कैड लिं खरी करेंगे अगर वह क्लिन कलर का हमर हो रहा है जरूर क्लिन कलर रहा है तो उसके ऊपर जैसे निकलेगा",
+      "कन्डल के ऊपर क्लोजिंग के बाद है"
+    ],
+    "notes": null,
+    "source_video": "Chapter_3_CandlesticksProTips_Tricks"
+  },
+  {
+    "strategy_name": "Candle High Low Break Entry Rule",
+    "instrument": null,
+    "timeframe": null,
+    "session": null,
+    "setup_conditions": [
+      "candle का एक low बना एक low है एक high है",
+      "अगर candle का low break हो रहा है उसके बाद market break होने के बाद अगर reverse फिर से ये range में आ गया candle में तो आप वहाँ पे तुरंत buy नहीं कर सकते",
+      "आपको wait करना पड़ेगा ये high को तोड़ने तक के लिए",
+      "already एक बार signal हमें मिल चुका है कि ये low break होने का possibility है, sellers ready है",
+      "same to same अगर high के scenario पे — candle का high break हो रहा है तो घुसते ही आप वहाँ पे sell नहीं कर सकते"
+    ],
+    "entry_trigger": {
+      "type": "BUY",
+      "candle_pattern": null,
+      "conditions": [
+        "candle का low break हुआ, फिर reverse होकर range में आया — तुरंत buy नहीं, high break होने का wait करो",
+        "candle का high break हुआ — तुरंत sell नहीं, low break होने पर sell करो"
+      ],
+      "indicator_values": null
+    },
+    "stop_loss": null,
+    "targets": [],
+    "exit_rules": [],
+    "risk_management": null,
+    "filters": [
+      "candle का low break होने के बाद reverse आने पर तुरंत buy नहीं करना",
+      "candle का high break होने पर तुरंत sell नहीं करना — trapping के चक्कर में मत पड़ो"
+    ],
+    "confidence": "HIGH",
+    "source_timestamps": [
+      "00:05:33",
+      "00:05:52",
+      "00:05:58",
+      "00:06:03",
+      "00:06:14",
+      "00:06:19"
+    ],
+    "direct_quotes": [
+      "इसका मतलब अगर candle का एक low बना एक low है एक high है अगर candle का low break हो रहा है उसके बाद market break होने के बाद अगर reverse फिर से ये range में आ गया candle में तो आप वहाँ पे तुरंत buy नहीं कर सकते आपको wait करना पड़ेगा ये high को तोड़ने तक के लिए",
+      "already एक बार signal हमें मिल चुका है कि ये low break होने का possibility है sellers ready है",
+      "same to same अगर high के scenario पे आप देखेंगे कि candle का high break हो रहा है तो घुसते ही आप वहाँ पे sell नहीं कर सकते",
+      "trapping के चक्कर में फिर आपको क्या आप पे sell करना पड़ेगा low break करेगा तो आप sell करेंगे नहीं तो आपको थोड़ा सा देखना पड़ेगा",
+      "यह बहुत golden tip है लोग बहुत बार यहां पर गलती करते है"
+    ],
+    "notes": "Teacher called this a 'golden tip' — most common mistake traders make",
+    "source_video": "Chapter_3_CandlesticksProTips_Tricks"
+  },
+  {
+    "strategy_name": "Always Use Stop Loss",
+    "instrument": null,
+    "timeframe": null,
+    "session": null,
+    "setup_conditions": [
+      "SL के बिना काम मत कीजिए"
+    ],
+    "entry_trigger": {
+      "type": null,
+      "candle_pattern": null,
+      "conditions": [],
+      "indicator_values": null
+    },
+    "stop_loss": {
+      "method": "mandatory",
+      "description": "SL के बिना काम मत कीजिए क्योंकि आपको भी नहीं पता कोई अगर एक लाख करोड़ से स्टॉक मार्केट को मैनपुलेट कर रहा है"
+    },
+    "targets": [],
+    "exit_rules": [],
+    "risk_management": "हमेशा SL के साथ काम कीजिएगा",
+    "filters": [],
+    "confidence": "LOW",
+    "source_timestamps": [
+      "00:07:18",
+      "00:07:25",
+      "00:07:31"
+    ],
+    "direct_quotes": [
+      "SL के बिना काम मत कीजिए क्योंकि आपको भी नहीं पता कोई अगर एक लाख करोड़ से स्टॉक मार्केट को मैनपुलेट कर रहा है कल के दिन में उसका बाप को ना आ जाए वह दो लाख करोड़ से आ गया तो यह बंदा फ़स जाएगा और साथ में आपको ले देगा इसीलिए हमेशा इस से काम कीजिएगा"
+    ],
+    "notes": null,
+    "source_video": "Chapter_3_CandlesticksProTips_Tricks"
+  },
+  {
+    "strategy_name": "SMC Default Entry Style",
+    "instrument": null,
+    "timeframe": "15min (higher timeframe) + 1min (lower timeframe)",
+    "session": null,
+    "setup_conditions": [
+      "डिफॉल्ट एंट्री सिर्फ और सिर्फ ऑर्डर ब्लॉक के आसपास ही अच्छा फॉल होगा",
+      "बड़े टाइम फ्रेम (15 मिनट) पर Order Block identify करना है जो unmitigated हो",
+      "Order Block के आसपास Liquidity grab हो चुका हो (inducement तोड़कर ऊपर/नीचे गया हो)",
+      "15 मिनट पर Order Block identify करने के बाद 1 मिनट चार्ट पर जाना है",
+      "1 मिनट पर Change of Character (CHoCH) देखना है",
+      "Change of Character के बाद last major supply/demand area की तरफ entry करनी है",
+      "इंडियन स्टाइल में Order Block को 20-30 point drag करके extend करना है ताकि Order Block miss न हो"
+    ],
+    "entry_trigger": {
+      "type": "BUY or SELL — दोनों mentioned हैं (context के अनुसार)",
+      "candle_pattern": null,
+      "conditions": [
+        "1 minute पे Change of Character मिल गया — तब entry लें",
+        "Change of Character होते ही entry लेंगे",
+        "50% quantity पहले entry, बाकी 50% जैसे price action बनाए वहां entry"
+      ],
+      "indicator_values": null
+    },
+    "stop_loss": {
+      "method": "पॉइंट-बेस्ड",
+      "description": "बैंक निफ्टी में 50 पॉइंट का स्टॉपलॉस; टॉप से लेकर जहां से Change of Character हो रहा है उसका पॉइंट बहुत ज्यादा नहीं होना चाहिए; अगर 150-160 पॉइंट का SL हो तो वह trade नहीं लेनी चाहिए"
+    },
+    "targets": [
+      "लास्ट जो major swing/demand area है वहां तक target",
+      "बड़े time frame जो भी निकल के आ रहा है वहां का देख लेंगे"
+    ],
+    "exit_rules": [
+      "जैसे price action बनाए — 50% quantity वहां exit/add",
+      "last major POI (Point of Interest) तक target"
+    ],
+    "risk_management": "दुनिया में सबसे ज्यादा important risk-reward है — अगर setup भी बढ़िया है लेकिन risk-reward 1:2 से कम है तो आप wrong part में हैं; 30 पॉइंट SL acceptable है; 150 पॉइंट SL acceptable नहीं",
+    "filters": [
+      "अगर change of character का point बहुत ज्यादा (जैसे 130-150 point) हो तो entry नहीं लेनी",
+      "अगर Order Block unmitigated नहीं है तो valid नहीं मानेंगे",
+      "1 hour के साथ 1 minute combination — beginners के लिए recommended नहीं क्योंकि setup बनने में 15-20 दिन लग सकते हैं"
+    ],
+    "confidence": "HIGH",
+    "source_timestamps": [
+      "00:00:56",
+      "00:01:32",
+      "00:05:51",
+      "00:05:56",
+      "00:06:00",
+      "00:06:04",
+      "00:08:25",
+      "00:08:32",
+      "00:09:50",
+      "00:09:56",
+      "00:10:00",
+      "00:10:37",
+      "00:11:15",
+      "00:17:55",
+      "00:18:01",
+      "00:18:06",
+      "00:18:18",
+      "00:18:21",
+      "00:18:24",
+      "00:19:32",
+      "00:20:26",
+      "00:41:49",
+      "00:41:55"
+    ],
+    "direct_quotes": [
+      "डिफॉल्ट जो कि नल्य बरोज में होता है",
+      "यह वाला इंटरी सिर्फ और सिर्फ ऑर्डर ब्लॉक के आसपास ही अच्छा फॉल होगा",
+      "default entry बताता है 1 minute पे change of character",
+      "जैसे यहां पर चेंज ऑफ क्रैक्टर हुआ तो लास्ट जो सप्लाइज लास्ट जो एक मेजर वाला एरिया है वहां",
+      "इंडिया में हम 20-30 point drag कर लिए, क्यों, ताकि हमें Indian style में order block miss ना हो जाया",
+      "15 minute पे 1 minute, 1 hour वे 5 minute",
+      "दुनिया में सबसे ज्यादा रिक्स रिवर्ड हो जाएगा तो अगर आपका सेट अप भी बढ़िया है लेकिन रिक्स वर्ड वन इस टू वन है यू आर पोइंट इन रॉन पार्ट"
+    ],
+    "notes": "Teacher ने explicitly बताया — यह combination: 15 minute higher timeframe + 1 minute lower timeframe है। 1 hour + 5 minute combination भी valid है। 1 hour + 1 minute beginners के लिए recommended नहीं। Forex में यह perfect काम करता है लेकिन Indian market में price जल्दी move करता है इसलिए flexibility रखनी पड़ती है।",
+    "source_video": "Chapter_5_SMC-FinalEntries"
+  },
+  {
+    "strategy_name": "SMC Desi/Indian Style Entry",
+    "instrument": null,
+    "timeframe": "15min",
+    "session": null,
+    "setup_conditions": [
+      "देशी एंट्री हर जगह यूज होगा — सिर्फ Order Block के पास नहीं, Inducement area पर भी",
+      "15 मिनट का टाइम फ्रेम देशी/Indian style के लिए",
+      "जो भी आपका entry place रहेगा (institutional निकालने के बाद बनाने के बाद) वहां पर जाना है 15 मिनट के टाइम फ्रेम पर",
+      "Order Block zone के आसपास price आने पर 15 मिनट पर candle का reaction देखना है",
+      "जोन के आसपास candle की body का closing या wick का closing जोन के आसपास होना चाहिए",
+      "Candle का body/wick zone के अंदर close हो — थोड़ा इधर-उधर चलेगा लेकिन पूरा ऊपर साइड में जाकर तोड़ के नहीं चला जाना चाहिए",
+      "Unmitigated order block होना चाहिए"
+    ],
+    "entry_trigger": {
+      "type": "SELL (example shown) / BUY (context dependent)",
+      "candle_pattern": "परनामेंट का कैंडल (Engulfing type candle mentioned) — कैंडल जोन के सामने close करे उसके नीचे/ऊपर निकले",
+      "conditions": [
+        "15 मिनट पर zone के आसपास candle आने पर — candle body/wick zone के आसपास close हो",
+        "इसके नीचे candle close हो (selling के लिए) — तब entry",
+        "पर-नामेंट कैंडल जोन के सामने क्लोज किया उसके नीचे निकला — तब sell entry",
+        "Inducement पर entry के लिए — देशी style यूज करना है, default style नहीं"
+      ],
+      "indicator_values": null
+    },
+    "stop_loss": {
+      "method": "कैंडल के ऊपर/नीचे",
+      "description": "इसके ऊपर निकला आपने ऐसा entry कर दिया इसके नीचे आपका SL दे दिया; कैंडल का high/low का SL"
+    },
+    "targets": [
+      "कैंडल का high/low का simple target तक — जो भी आपका SL price से निकल के आ रहा है",
+      "जो भी बड़े time frame का POI निकल के आ रहा है वहां तक"
+    ],
+    "exit_rules": [
+      "जोन को candle ने respect नहीं किया — एकदम बाउंसिंग बॉल की तरह चला गया — तो वह candle valid नहीं"
+    ],
+    "risk_management": null,
+    "filters": [
+      "जोन को candle ने respect नहीं किया — zone से बहुत दूर जाकर close हुआ — तो valid नहीं मानेंगे",
+      "Candle पूरा ऊपर साइड में जाकर तोड़ के चला गया — तो cautious play करेंगे",
+      "Inducement पर entry के लिए 5 minute या 1 minute default style यूज नहीं करना — देशी style लगाना है",
+      "अगर Order Block के बिल्कुल नजदीक inducement है तो वहां पर entry नहीं करेंगे"
+    ],
+    "confidence": "HIGH",
+    "source_timestamps": [
+      "00:02:20",
+      "00:02:26",
+      "00:42:15",
+      "00:42:20",
+      "00:42:26",
+      "00:42:32",
+      "00:42:37",
+      "00:43:29",
+      "00:43:35",
+      "00:43:41",
+      "00:43:47",
+      "00:44:22",
+      "00:44:28",
+      "00:44:53",
+      "00:45:24",
+      "00:45:30",
+      "00:46:00",
+      "00:46:18",
+      "00:46:28",
+      "00:46:45",
+      "00:46:50",
+      "00:48:06",
+      "00:48:23"
+    ],
+    "direct_quotes": [
+      "देशी एंड्री हर जगह यूज होगा",
+      "देशी स्टाइल यहां पर हमारा प्रोबाइलिटी और बढ़ जाएगा",
+      "15 मिनट का टाइम फ्रेम देशी/Indian style के लिए",
+      "मतलब वॉडी का जो क्लॉजिंग होगा या फिर विक वाला होगा वह कैंडल के आसपास मतलब ज़ोन के आसपास होना चाहिए",
+      "जोन को रिस्पेक्ट नहीं किया तो फार के चला गया एकदम बाउंसिंग बॉल की तरह वह नहीं चलेगा",
+      "देशी एंट्री बहुत सिंपल है बहुत पावरफुल है",
+      "अगर हम इंडूसमेंट पर ट्रेट कर रहे हैं तो हमें देशी तरकाओं वहां पर लगाना"
+    ],
+    "notes": "Teacher ने कहा — यह देशी/Indian style entry हर जगह use होगी जबकि default entry सिर्फ Order Block के पास। Inducement पर trade करते समय हमेशा देशी style use करना है। Teacher ने यह भी कहा कि यह चीज ढूंढने में उन्हें लगभग दो साल लगे।",
+    "source_video": "Chapter_5_SMC-FinalEntries"
+  },
+  {
+    "strategy_name": "Gap Strategy (Gap Strategy using Fibonacci)",
+    "instrument": "NIFTY / BANKNIFTY",
+    "timeframe": "5min",
+    "session": "Before 12:30 PM (साढ़े बारा बजे के पहले)",
+    "setup_conditions": [
+      "NIFTY में minimum 80 point का gap up या gap down होना चाहिए",
+      "BANKNIFTY में minimum 180 point का gap up या gap down होना चाहिए",
+      "अगर NIFTY 300 point या BANKNIFTY 600 point से ज्यादा gap open हो तो उस दिन play नहीं करना",
+      "Gap up या gap down open होने के बाद 5 minute के chart पर एक swing बनना चाहिए",
+      "Swing के बिना यह strategy applicable नहीं है",
+      "अगर market one way में खीच देगा तो यह strategy applicable नहीं है",
+      "साढ़े बारा बजे के बाद strategy activate नहीं हुई तो उस दिन trade नहीं लेना",
+      "Fibonacci tool को swing के top से bottom तक (week to week) mark करना है",
+      "Fibonacci setting में सिर्फ 0.5 (50%) level रखना है, बाकी सब untick करना है",
+      "Fibonacci में सिर्फ 0, 0.5, 1 का level रखना है",
+      "Minimum 4 five-minute candles का closing देखना है — या तो 0.5 के ऊपर या 0.5 के नीचे",
+      "अगर 4 candle 0.5 के नीचे close करें तो downside trade लेना है",
+      "अगर 4 candle 0.5 के ऊपर close करें तो upside trade लेना है",
+      "जितना ज्यादा candle उस side close करेंगे उतना better है, minimum 4 चाहिए",
+      "Support और resistance पहले से draw करके रखना है"
+    ],
+    "entry_trigger": {
+      "type": "BUY or SELL — direction based on Fibonacci 0.5 level",
+      "candle_pattern": null,
+      "conditions": [
+        "अगर 4 five-minute candles Fibonacci 0.5 के नीचे close करें तो day low के नीचे 5 minute candle close होने पर SELL trade लेना है",
+        "अगर 4 five-minute candles Fibonacci 0.5 के ऊपर close करें तो day high के ऊपर 5 minute candle close होने पर BUY trade लेना है",
+        "Aggressive entry: जैसे ही candle day high/low को तोड़कर close करे",
+        "Balanced entry: candle close करे, next candle उसके low को न तोड़े और retest करे तो retest पर entry",
+        "Defensive entry: भी available है (teacher ने तीनों entry activate बताई है)"
+      ],
+      "indicator_values": "Fibonacci 0.5 (50%) level — golden level"
+    },
+    "stop_loss": {
+      "method": "Fixed point based",
+      "description": "NIFTY में 25-40 point का stop loss। BANKNIFTY में 60 से 80 point का SL। SL approximately 0.5 level के आसपास जाता है।"
+    },
+    "targets": [
+      "Next support तक (BUY trade के लिए next support तक)",
+      "Next resistance तक (SELL trade के लिए next resistance तक)",
+      "Trailing करके चलना है — trail करना must है इस strategy में",
+      "Trailing start करने की जगह: next support या resistance के point तक",
+      "One is to ten, one is to fifteen भी मिल सकता है",
+      "NIFTY में basic target: 25-40 point",
+      "BANKNIFTY में basic target: 60-80 point"
+    ],
+    "exit_rules": [
+      "Trailing is must in this strategy",
+      "Next support या resistance तक पहुंचने पर trailing start करना है",
+      "जब market sideways हो जाए तो trail SL hit होने पर exit",
+      "साढ़े बारा बजे के बाद अगर setup activate न हो तो उस दिन trade नहीं लेना"
+    ],
+    "risk_management": "No strategy has been proved above 75-78% winning rate। इस strategy का worst case winning rate 65% है। एक दिन का profit चार दिन के losses को cover कर सकता है। Rules में कोई भी छेरखानी मत करो। At least 10-15 दिन strategy को use करो verdict निकालने से पहले।",
+    "filters": [
+      "अगर NIFTY 300 point से ज्यादा या BANKNIFTY 600 point से ज्यादा gap open हो तो उस दिन avoid करो",
+      "अगर swing नहीं बना तो strategy applicable नहीं",
+      "अगर market one way में खीच दे (swing create न हो) तो strategy applicable नहीं",
+      "साढ़े बारा बजे के बाद strategy activate न हो तो उस दिन avoid",
+      "अगर closing नहीं आ रहा है तो trade नहीं लेना",
+      "BANKNIFTY में minimum 180 point से कम gap हो तो avoid",
+      "NIFTY में minimum 80 point से कम gap हो तो avoid",
+      "अगर entry level से बहुत नीचे (लगभग 240 point नीचे) closing मिल रही हो तो risk-reward ठीक नहीं — trade avoid करो",
+      "Range के अंदर gap खुले तो थोड़ा सतर्क रहना है"
+    ],
+    "confidence": "HIGH",
+    "source_timestamps": [
+      "00:03:46",
+      "00:04:11",
+      "00:04:27",
+      "00:05:26",
+      "00:05:33",
+      "00:05:38",
+      "00:05:50",
+      "00:06:02",
+      "00:06:25",
+      "00:06:40",
+      "00:06:50",
+      "00:07:01",
+      "00:07:28",
+      "00:07:44",
+      "00:08:01",
+      "00:08:46",
+      "00:09:02",
+      "00:09:21",
+      "00:09:50",
+      "00:12:58",
+      "00:13:27",
+      "00:13:35",
+      "00:13:42",
+      "00:13:45",
+      "00:13:52",
+      "00:13:56",
+      "00:14:00",
+      "00:14:13",
+      "00:14:18",
+      "00:14:24",
+      "00:14:36",
+      "00:14:43",
+      "00:15:19",
+      "00:15:22",
+      "00:15:29",
+      "00:15:35",
+      "00:15:45",
+      "00:15:51",
+      "00:18:05",
+      "00:19:23",
+      "00:20:08",
+      "00:21:29",
+      "00:22:54",
+      "00:23:11",
+      "00:24:14",
+      "00:24:38",
+      "00:25:08",
+      "00:25:21",
+      "00:32:46",
+      "00:33:55",
+      "00:37:11",
+      "00:37:50",
+      "00:38:04"
+    ],
+    "direct_quotes": [
+      "निफ्टी में मिनिमम 80 पॉइंट का... बैंक निफ्टी में मिनिमम 180 पॉइंट",
+      "पांच मिनट का टाइम फ्रेम में आपको समझाना है और मिनिमम हमें 45 मिनट का कैनल देखना है",
+      "मिनिमम चार कैंडल हमें चाहिए",
+      "strategy का must rules है क्योंकि ये trending strategy दे देता है तो कभी-कभी one is to ten, one is to fifteen भी आपको मिल जाता है, इसलिए trail करके चलना है",
+      "trailing is must in this strategy",
+      "स्विंग चाहिए, स्विंग के बिना नहीं होगा, अगर market वन वे में खीच देगा तो यह strategy applicable नहीं है",
+      "4-5 minute का candle golden level के नीचे close करेगा तो आपको lower range के lower वाला जो line है इसके नीचे closing पर trade लेना है",
+      "और अगर 0.5 के उपर candle जाके close करेगा तो आपको उपर वाला जो line है उसके उपर closing के उपर trade लेना है",
+      "भले ही आपको थोड़ी देर बाद trade मिले लेकिन सही trade मिलना चाहिए",
+      "यह strategy का winning rate मैं 65% बोल रहा हूं worst के सिनारियों में",
+      "एक बात अभी तक कोई भी स्ट्रेटेजी अबाव 75 से 78 परसेंट के ऊपर प्रूव्ड नहीं है",
+      "साढ़े बारा बजे के बाद हम नहीं देखेंगे पाच मीट का टाइम फ्रेम",
+      "यह strategy एक दिन करके प्लीज रिजल्ट और वर्डिक्ट मत निकालिएगा एट लीस्ट अगर यह सेट बनता है तो आने वाले 10 से 15 दिन यह वाला स्ट्रेटी को यूज कीजिएगा",
+      "180 पॉइंट मिनिमम... NIFTY में minimum 80 point... इससे ज्यादा नहीं पॉइंट",
+      "swing create नहीं हुआ है... यह एक flaw है strategy का"
+    ],
+    "notes": "Teacher ने बताया कि यह strategy 2 parts में explain होगी — यह Part 1 है। Part 2 में advanced scenarios discuss होंगे जैसे बहुत बड़ा gap (300+ NIFTY, 600+ BANKNIFTY), range के अंदर gap आदि। Teacher ने यह भी कहा कि वह खुद SMC और views को इस strategy के साथ combine करके use करते हैं लेकिन beginners को simply इसे use करना चाहिए। Strategy का नाम teacher ने 'Gap Strategy' बताया।",
+    "source_video": "Chapter_1_GAP-1"
+  },
+  {
+    "strategy_name": "Candlestick Sentiment Advanced Analysis",
+    "instrument": "NIFTY",
+    "timeframe": "Daily",
+    "session": null,
+    "setup_conditions": [
+      "कैंडल बनने से पहले आपको एक आइडिया लग जाएगा कि अगर यहां पर यह कैंडल बनेगा तो मैं ऐसा कर सकता हूं",
+      "डेली टाइम फ्रेम का कैंडल बड़ा-बड़ा होता है — daily timeframe candles are large so you get good points",
+      "मार्केट का सेंटिमेंट क्या बोल रहा है — overall market sentiment must be checked",
+      "इसके नीचे नंबर वन बार तो निकला ही नहीं और ऊपर में लिक्यूडिटी पड़ा हुआ था तो यह ऑलरेडी एक रेंज हो गया",
+      "जब तक चेंज ऑफ कैरेक्टर नहीं होगा माइनर सहो मेजर सहो तब तक तो आप अपसाइड का बैठे नहीं रह सकते",
+      "इसके ऊपर एक कैंडल क्लोस किया और मार्किट में एक अपसाइड का मोमेंटम रहेगा"
+    ],
+    "entry_trigger": {
+      "type": "SELL",
+      "candle_pattern": "Shooting Star",
+      "conditions": [
+        "शूटिंग स्टार बनाया है — Shooting Star formed at resistance/swing high",
+        "स्विंग के नीचे निकला नहीं तो सेल नहीं करना — price must break below swing low to confirm sell",
+        "इसके नीचे जैसे निकलेगा हमें वहां पर सेल करना है — sell when price breaks below the level",
+        "कम से कम इसके नीचे तो निकलना चाहिए सेलर्स को कंटिन्यू करने के लिए जब तक नहीं निकलेगा तब तक हम सेल नहीं कर सकते"
+      ],
+      "indicator_values": null
+    },
+    "stop_loss": {
+      "method": null,
+      "description": null
+    },
+    "targets": [],
+    "exit_rules": [],
+    "risk_management": "अगर लॉसेस कम हो जाएगा ना प्रॉफिट अपने आप बढ़ जाएगा — if you minimize losses from 4 days to 2 days out of 10, profit automatically increases",
+    "filters": [
+      "जब मार्केट अप्रेड में रहता है तो कोई resistance वो अच्छा नहीं होता है — when market is in uptrend, resistance is not reliable, so do not trade hammer from above in such conditions",
+      "हैमर सपोर्ट पर बिल्कुल कर रहे हैं और घंटा काम करेंगे — hammer at support alone is not enough, do not blindly trade it",
+      "गैप डाउन ओपन होकर ओपन हुआ है तो थोड़ा बड़ा आएगा — gap down open candles need extra caution",
+      "1 मिनट टाइम फ्रेम पर मत देखिए — do not use 1-minute timeframe",
+      "बहुत अर्ली स्टेज पर है ट्रेडिंग के वह पांच मिनट को अवधित — beginners should avoid 5-minute timeframe; minimum timeframe advice implied for early traders"
+    ],
+    "confidence": "MEDIUM",
+    "source_timestamps": [
+      "00:00:56",
+      "00:03:37",
+      "00:03:43",
+      "00:03:54",
+      "00:03:59",
+      "00:05:04",
+      "00:06:37",
+      "00:06:43",
+      "00:17:06",
+      "00:17:09",
+      "00:18:06",
+      "00:13:02"
+    ],
+    "direct_quotes": [
+      "कैंडल बनने से पहले आपको एक आइडिया लग जाएगा कि अगर यहां पर यह कैंडल बनेगा तो मैं ऐसा कर सकता हूं",
+      "कम से कम इसके नीचे तो निकलना चाहिए सेलर्स को कंटिन्यू करने के लिए जब तक नहीं निकलेगा तब तक हम सेल नहीं कर सकते",
+      "इसके नीचे निकलेगा हमें वहां पर सेल करना है और यह बुम सेलिंग पर आ गया",
+      "जब मार्केट अप्रेड में रहता है तो कोई resistance वो अच्छा नहीं होता है",
+      "अगर लॉसेस कम हो जाएगा ना प्रॉफिट अपने आप बढ़ जाएगा",
+      "जब तक चेंज ऑफ कैरेक्टर नहीं होगा माइनर सहो मेजर सहो तब तक तो आप अपसाइड का बैठे नहीं रह सकते"
+    ],
+    "notes": "यह second part of candlestick chapter है। Teacher is showing real-life examples on NIFTY Daily timeframe. The core teaching is to combine candlestick patterns with market structure (swing highs/lows, break of structure, change of character) and overall sentiment rather than trading candlestick patterns in isolation.",
+    "source_video": "Chapter_2_Candlestick-P2"
+  },
+  {
+    "strategy_name": "Bullish Harami BUY Setup",
+    "instrument": "BANKNIFTY",
+    "timeframe": "Daily",
+    "session": null,
+    "setup_conditions": [
+      "एक बुलिश हरामी कैंडल है और पायर स्ट्रांग कैंडल भी है — bullish harami candle present along with a strong buyer candle",
+      "सपोर्ट एरिया के आसपास बनेगा — forms near support area",
+      "ब्रेक ऑफ स्ट्रक्चर वार्ड मार्केट — break of structure upward",
+      "चेंज ऑफ क्रैक्टर हुआ — change of character confirmed",
+      "पायर्स फुल यहां पर इनवॉल्व कर दिया सेलर्स — buyers fully involved, sellers trapped",
+      "सेलर्स गिव आप कर दिया — sellers gave up"
+    ],
+    "entry_trigger": {
+      "type": "BUY",
+      "candle_pattern": "Bullish Harami",
+      "conditions": [
+        "चेंज ऑफ क्रैक्टर हुआ नेक्स्ट कैंडल क्या हुआ — wait for change of character, then next candle confirmation",
+        "नेक्स्ट कैंडल तुरंत वहां पर एक एंडल बन गया — next candle immediately forms engulfing/strong candle",
+        "बुली शरामी कैंडल तो पायार पूर्व तरीके से इंटरेस्टेड — bullish harami shows buyers fully interested",
+        "सेलर्स इतना अच्छा सपोर्ट तोड़ने के बाद इंटरेस्टेड नहीं है तो मार्केट फिर ऊपर में जाने की पॉजिटीज कर सकता है"
+      ],
+      "indicator_values": null
+    },
+    "stop_loss": {
+      "method": null,
+      "description": null
+    },
+    "targets": [],
+    "exit_rules": [],
+    "risk_management": null,
+    "filters": [
+      "सपोर्ट एरिया चार बार टेस्टेड है जिसका तोड़ने का चांसेस बहुत हाई है — if support has been tested 4 times, chances of break are very high, be cautious",
+      "इतना अच्छी सफ — good support breaking yet doji candle forming is suspicious, do not blindly buy"
+    ],
+    "confidence": "MEDIUM",
+    "source_timestamps": [
+      "00:20:15",
+      "00:20:19",
+      "00:20:25",
+      "00:20:31",
+      "00:20:38",
+      "00:20:44",
+      "00:21:45",
+      "00:21:51",
+      "00:22:29",
+      "00:22:34",
+      "00:22:43",
+      "00:23:18",
+      "00:24:16",
+      "00:24:21"
+    ],
+    "direct_quotes": [
+      "एक बुलिश हरामी कैंडल भी है और पायर स्ट्रांग कैंडल भी है",
+      "सेलर्स इतना अच्छा सपोर्ट तोड़ने के बाद इंटरेस्टेड नहीं है तो मार्केट फिर ऊपर में जाने की पॉजिटेज कर सकता है",
+      "पायर्स फुल यहां पर इनवॉल्व कर दिया सेलर्स और एक इजी ट्रेड आपको मिल गया यहां से वन वे मार्केट अपसाइड आफ",
+      "बुली शरामी कैंडल तो पायार पूर्व तरीके से इंटरेस्टेड",
+      "चेंज ऑफ क्रैक्टर हुआ नेक्स्ट टेंडल क्या हुआ नेक्स्ट कैडल तुरंत वहां पर एक एंडल बन गया"
+    ],
+    "notes": "Teacher demonstrated this on BANKNIFTY daily timeframe as a real-life example. The key concept is that even after a support break, if buyers aggressively take back price (bullish harami + strong follow-through candle), it signals a trap for sellers and a buy opportunity. Market structure context (change of character, break of structure) is essential.",
+    "source_video": "Chapter_2_Candlestick-P2"
+  },
+  {
+    "strategy_name": "Fair Value Gap (FVG) Trading",
+    "instrument": "BANKNIFTY",
+    "timeframe": "15min",
+    "session": null,
+    "setup_conditions": [
+      "फेयर वैलू गैप एक price का imbalance होता है जहां पर price ठीक से movement नहीं किया",
+      "तीन candle का structure होता है fair value gap में - हमेशा तीन candle का structure होता है",
+      "पहला candle और third candle का अगर कोई भी तरीके से body to body, weak to weak interception नहीं हो रहा है तो उसको हम fair value gap कहते है",
+      "middle वाला candle कुछ भी हो का चलेगा",
+      "अगर first candle और third candle में intersection आ जाता है तो fair value gap नहीं है",
+      "Fair value gap हमेशा order block के आसपास ढूंढने की कोशिश करें - यह पहली priority होगी",
+      "Second priority - support resistance zone के सामने fair value gap ढूंढने की कोशिश करें",
+      "Fair value gap जो है वो trend के साथ use करना है, trend के opposite नहीं",
+      "कहाँ पर fair value gap बन रहा है वो भी important होता है - middle of chart जहाँ पर कुछ भी नहीं वहाँ पर बने तो use नहीं करेंगे",
+      "Fair value gap 80% chances fill होता है",
+      "जो fair value gap order block के बिल्कुल सामने बन गया वो बहुत अच्छा work करता है"
+    ],
+    "entry_trigger": {
+      "type": "BUY or SELL — trend direction ke saath",
+      "candle_pattern": "3 candle structure with no intersection between first and third candle",
+      "conditions": [
+        "Fair value gap के आसपास price आने के बाद setup activate होना चाहिए",
+        "Setup activate होगा तब trade लेंगे, activate नहीं होता है तो trade नहीं लेंगे",
+        "Order block के सामने fair value gap हो तो double quantity भी trade ले सकते हैं",
+        "15 minute का entry use करते है fair value gap में",
+        "15 minute entry method 4th या 5th video में discuss होगा"
+      ],
+      "indicator_values": null
+    },
+    "stop_loss": {
+      "method": "sniper entry based stoploss",
+      "description": "BANKNIFTY spot पर stoploss 27 से 30 point - इसे कहते हैं sniper entry"
+    },
+    "targets": [],
+    "exit_rules": [],
+    "risk_management": "Fair value gap पे 100% नहीं होता है, कभी भी उस तरह का aggressive entry नहीं लेना है। Market के साथ कभी लड़ाई नहीं करना है। 80% chances fill होता है लेकिन जब fill नहीं होगा तब जोड़ जबरदस्ती उसके लिए बैठे नहीं रहेंगे।",
+    "filters": [
+      "Small timeframe (1 min) पर मत जाइए - वहाँ पर volatility बहुत ज्यादा रहता है, fair value gap ठीक से काम नहीं कर सकता",
+      "Middle of chart जहाँ पर कोई support resistance नहीं, कोई order block नहीं, कोई round number नहीं - वहाँ fair value gap देखेंगे ही नहीं",
+      "Trend के opposite जाके fair value gap use करेंगे तो बहुत बार दिक्कत का सामना करना पड़ेगा",
+      "Sideways market में fair value gap पर buy नहीं करेंगे",
+      "जहाँ पर कोई support resistance नहीं है, कोई order block area नहीं है, कोई round number नहीं है - वहाँ पर trade नहीं लेंगे"
+    ],
+    "confidence": "HIGH",
+    "source_timestamps": [
+      "00:00:26",
+      "00:03:51",
+      "00:03:54",
+      "00:04:07",
+      "00:04:25",
+      "00:05:20",
+      "00:05:24",
+      "00:05:29",
+      "00:05:30",
+      "00:07:13",
+      "00:13:56",
+      "00:14:03",
+      "00:14:39",
+      "00:18:16",
+      "00:18:59",
+      "00:19:06",
+      "00:19:09",
+      "00:21:24",
+      "00:21:34",
+      "00:22:25",
+      "00:22:29",
+      "00:22:34",
+      "00:24:39",
+      "00:33:48",
+      "00:39:40",
+      "00:39:45",
+      "00:40:10",
+      "00:40:12",
+      "00:41:31",
+      "00:42:01"
+    ],
+    "direct_quotes": [
+      "फेयर वैलू गैप सिंपल एक प्राइस का imbalance होता है जहां पर imbalance आता है",
+      "तीन candle में पहला candle और third candle का अगर कोई भी तरीके से body to body, weak to weak interception नहीं हो रहा है तो उसको हम fair value gap कहते है",
+      "middle वाला candle कुछ भी हो का चलेगा",
+      "हमेशा हम order block के आसपास fair value gap निकालने की कोशिश करें - यह हमारे लिए पहली priority होगी",
+      "fair value gap 80% chances fill होता है",
+      "fair value gap अगर आप trend के opposite जाके उसको use करेंगे तो वहाँ पे आपको बहुत बार दिक्कत का सामना करना पड़ेगा",
+      "entry method क्या रहता है ये fair value gap में - simple हम 15 minute का entry use करते है fair value gap में",
+      "fair value gap पे 100% नहीं होता है, कि आपको कभी भी उस तरह का aggressive entry नहीं लेना है",
+      "zone भी important होता है, कहाँ पर fair value gap बन रहा है, और किस जगा, मतलब order block के आसपास बन रहा है कि नहीं बन रहा है, वो भी important होता है",
+      "15 minute से शुरू कीजिए - एडवाइज यही रहेगा",
+      "BANKNIFTY spot पर stoploss 27 से 30 point - इसे कहते हैं sniper entry"
+    ],
+    "notes": "Teacher ने बताया कि SMC (Smart Money Concept) के 4th या 5th video में 15 minute entry method detail में discuss होगा। Selling imbalance, buying inefficiency जैसे advanced concepts इस course में include नहीं किए गए क्योंकि Indian market पे उस तरह से काम नहीं आता, Forex पे ज्यादा काम आता है। 5 साल से कम experience वालों को 5 minute timeframe avoid करना चाहिए। लगभग 1 साल का experience हो तो 15 minute से शुरू कर सकते हैं।",
+    "source_video": "Chapter_2_FVG"
+  },
+  {
+    "strategy_name": "Imbalance Based Trade Filter",
+    "instrument": "NIFTY / BANKNIFTY",
+    "timeframe": "1min / 5min / 15min",
+    "session": null,
+    "setup_conditions": [
+      "Imbalance sirf running market mein hota hai — 9:15 se lekar market band hone tak",
+      "Gap (imbalance) mein koi bhi wick touch nahi hona chahiye — proper clean gap hona chahiye",
+      "15 minute ka imbalance sabse rare aur sabse powerful hota hai",
+      "5 minute ka imbalance medium rare aur medium powerful hota hai",
+      "1 minute ka imbalance common cases mein hota hai aur less powerful hota hai",
+      "Gap aur FVG alag hain — imbalance ko dono se confuse mat karna",
+      "Market opening ka gap (kal 3:30 close, aaj 9:15 open) imbalance nahi hai",
+      "1 hour timeframe pe imbalance kabhi nahi hota — 1 hour se zyada mein imbalance dekhna nahi hai",
+      "Minimum gap: at least 0.01% — Nifty mein lagbhag 2 point, Bank Nifty mein 3.5 se 5 point",
+      "Chart mein gap aankhon ko clearly dikhna chahiye — zoom karke force mat karo",
+      "Dono brokers mein imbalance confirm karo — at least 2 brokers mein check karo",
+      "Spot chart aur option chart dono dekhna padta hai kabhi kabhar",
+      "Spot chart hamesha superior hai option chart se",
+      "Expiry ke din sirf spot chart pe imbalance dekhna hai — options chart pe bilkul nahi",
+      "Higher time frame (1 hour se zyada) mein kuch major setup ho (OB, breakout, etc.) toh 1 minute ka imbalance ignore karo",
+      "Sideways market mein imbalance sabse zyada dekha jaata hai"
+    ],
+    "entry_trigger": {
+      "type": null,
+      "candle_pattern": null,
+      "conditions": [
+        "Imbalance ka main use trade lena nahi hai — galat jagah pe trade lene se bachana hai (loss bachana)",
+        "Agar 1 hour ke chart pe entry ban rahi hai aur 1 minute pe imbalance dikh raha hai toh 1 minute ka imbalance ignore karo aur higher timeframe entry lo",
+        "Agar 1 hour chart pe entry hai aur 15 minute pe imbalance hai — toh us imbalance ko consider karo kyunki 15 minute powerful hota hai",
+        "Sideways market mein imbalance pe nazar rakhna — wahan imbalance sabse zyada milta hai"
+      ],
+      "indicator_values": null
+    },
+    "stop_loss": {
+      "method": null,
+      "description": null
+    },
+    "targets": [],
+    "exit_rules": [],
+    "risk_management": null,
+    "filters": [
+      "Market opening gap ko imbalance mat maano",
+      "Zoom karke force mat karo gap dhundhne ke liye — agar dikh nahi raha toh hai nahi",
+      "20 paise ka gap imbalance nahi hai — minimum 0.01% hona chahiye",
+      "Wick agar gap area mein aa chuki hai toh us gap ko imbalance mat maano",
+      "Expiry ke din options chart pe imbalance mat dhundho",
+      "1 hour ya usse zyada timeframe pe koi major setup (OB, breakout) ho toh neeche ke timeframe ka imbalance ignore karo — rally miss ho jaegi",
+      "Future chart ko bilkul mat dekho — ignore the future chart",
+      "Trading View free plan se door rehna — broker ka chart use karo",
+      "Ek hi broker pe mat dekho — do brokers mein imbalance confirm karo",
+      "Crypto mein imbalance bahut kam hota hai"
+    ],
+    "confidence": "HIGH",
+    "source_timestamps": [
+      "00:05:03",
+      "00:07:03",
+      "00:07:31",
+      "00:07:55",
+      "00:09:10",
+      "00:09:19",
+      "00:09:25",
+      "00:09:31",
+      "00:09:39",
+      "00:09:47",
+      "00:10:16",
+      "00:11:03",
+      "00:11:31",
+      "00:11:52",
+      "00:12:21",
+      "00:12:38",
+      "00:20:26",
+      "00:20:35",
+      "00:21:55",
+      "00:22:35",
+      "00:23:59",
+      "00:24:48",
+      "00:25:07",
+      "00:25:28",
+      "00:28:11",
+      "00:28:52",
+      "00:29:00",
+      "00:29:07",
+      "00:31:38",
+      "00:31:42",
+      "00:32:03",
+      "00:34:27",
+      "00:35:23",
+      "00:36:20",
+      "00:36:32",
+      "00:40:09",
+      "00:40:24",
+      "00:41:12",
+      "00:41:41",
+      "00:42:34",
+      "00:43:35"
+    ],
+    "direct_quotes": [
+      "gap ko imbalance nahi bola jaata hai — gap alag cheez hota hai",
+      "running market mein gap create hona chahiye — running market ke bahar jo gap create hota hai woh imbalance nahi hai",
+      "15 minutes pe hota hai — very rare case, bahut powerful case",
+      "1 minute pe — common cases, less powerful. 15 minute will always win, just like higher time frame will always win",
+      "force nahi karna hai — agar imbalance nahi dikh raha hai toh wahan pe zoom karke chart ko zoom karo chart ko zoom karo",
+      "koi bhi wicks wahan pe touch nahi hona chahiye",
+      "at least 0.01% ke aaspaas — Nifty mein 2 point ke aaspaas, Bank Nifty mein 3-4 point ke aaspaas",
+      "expiry ke din options ka chart ko bilkul nahi dekhna hai imbalance find karne ke liye — sirf aur sirf spot chart ko dekhna hai",
+      "imbalance ka main importance kya hai — trade lena nahi, loss bachana. Galat jagah pe trade lene se imbalance humein bacha deta hai",
+      "always check with at least two brokers, or two charts",
+      "spot is hamesha superior",
+      "sideways market pe imbalance sabse zyada dekha jaata hai",
+      "higher time frame mein 1 hour se zyada mein kuch bhi accha conventional dekhne ko mile toh do not go for imbalance"
+    ],
+    "notes": "Teacher ne clearly bataya ki imbalance ka primary use entry lena nahi balki galat jagah pe trade lene se bachna hai. Yeh class ek conceptual/educational session hai — koi specific entry candle pattern ya stoploss rule is session mein explicitly mention nahi kiya gaya. Teacher ne kaha ki yeh topic kisi bhi book, course ya video mein nahi milega. Recorded class 12-13 ghante mein update hogi.",
+    "source_video": "PriceImbalance"
+  }
+]

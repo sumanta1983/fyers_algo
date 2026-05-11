@@ -1,0 +1,70 @@
+# Market Data Unsubscribe
+To stop receiving real-time data updates for a specific stock symbol or a group of symbols, you can utilize the "unsubscribe" action in the WebSocket API. Sending an "unsubscribe" message will remove the specified symbol(s) from your active subscriptions, and you will no longer receive updates for those symbols. You can check the sample code to know how to unsubscribe to already subscribed symbols.
+
+
+# The Node Script
+--------------------
+
+const FyersSocket = require("fyers-api-v3").fyersDataSocket
+
+var fyersdata= new FyersSocket("xxxxx-1xx:ey....")
+
+function onmsg(message){
+    console.log(message)
+    //if ltp for SBIN crosses 100 you sell and unsubscibe to SBIN as its data is no longer required
+    if(message.ltp>100 &&message.symbol=="NSE:SBIN-EQ"){
+        // sell position and unsubscribe
+        fyersdata.unsubscribe(["NSE:SBIN-EQ"],false)
+    }
+}
+
+function onconnect(){
+    fyersdata.subscribe(['NSE:NIFTY50-INDEX','NSE:TCS-EQ']) //not subscribing for market depth data
+    fyersdata.subscribe(['NSE:IDEA-EQ'],true) //subscribing for market depth
+    // fyersdata.mode(fyersdata.LiteMode) //set data mode to lite mode
+    // fyersdata.mode(fyersdata.FullMode) //set data mode to full mode is on full mode by default
+    fyersdata.autoreconnect() //enable auto reconnection mechanism in case of disconnection
+}
+
+function onerror(err){
+    console.log(err)
+}
+
+function onclose(){
+    console.log("socket closed")
+}
+
+fyersdata.on("message",onmsg)
+fyersdata.on("connect",onconnect)
+fyersdata.on("error",onerror)
+fyersdata.on("close",onclose)
+
+fyersdata.connect()
+
+------------------------------------------------------------------------------------------------------------------------------------------
+Sample Success Response 
+------------------------------------------------------------------------------------------------------------------------------------------
+          
+ { type: 'unsub', s: 'ok', message: 'successful', code: 200 }
+
+
+#############################################
+############################################
+################################################
+
+# Advanced Configuration
+The WebSocket queue processing interval is an Optional setting that allows you to customize how frequently data in the subscription queue is handled. By default, this interval is set to 1 millisecond, but it can be adjusted to better suit your application's specific needs and performance preferences.
+
+1. Customizable Interval: You can set the processing interval anywhere between 1ms to 2000ms (2 seconds), giving you flexibility to optimize performance and responsiveness.
+2. Dynamic Adjustment: The interval setting can be changed at any time during an active WebSocket session.
+3. Performance Optimization: Shorter intervals (1-10ms) are ideal for high-frequency trading scenarios that benefit from rapid data processing, while slightly longer intervals (100-500ms) work well for general market data streaming.
+4. Resource Management: You can tune the interval based on how your application handles incoming data, helping to maintain smooth operation across different environments.
+
+
+# The Node Script
+
+const FyersSocket = require("fyers-api-v3").fyersDataSocket
+
+var fyersdata= new FyersSocket("xxxxx-1xx:ey....","logpath",true/*flag to enable disable logging*/)
+fyersdata.setQueueProcessInterval(200)  // 200ms - more reasonable interval for queue processing
+fyersdata.connect()

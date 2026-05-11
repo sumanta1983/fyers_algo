@@ -1,0 +1,26 @@
+# Python deps for app_token/ + python_engine/.
+# Tested with Python 3.12.
+# Versions on Fyers/pandas stack pinned to what worked in temp_data/requirements.txt;
+# new additions use minimum bounds.
+
+# --- Fyers ---
+fyers-apiv3==3.1.12
+
+# --- Config / env ---
+python-dotenv>=1.0
+
+# --- Storage ---
+redis>=5.0
+psycopg[binary]>=3.2
+psycopg-pool>=3.2
+
+# --- Data / strategies ---
+pandas==3.0.2
+numpy==2.2.6
+pandas-ta==0.4.71b0
+
+# --- HTTP (used as fallback for endpoints not covered by the SDK, e.g. token refresh) ---
+requests==2.31.0
+
+# --- Dev / tests ---
+pytest>=8.0

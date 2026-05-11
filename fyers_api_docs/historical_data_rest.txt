@@ -1,0 +1,134 @@
+## History
+The historical API provides archived data (up to date) for the symbols. across various exchanges within the given range. A historical record is presented in the form of a candle and the data is available in different resolutions like - minute, 10 minutes, 60 minutes...240 minutes and daily.
+
+
+# To Handle partial Candle
+
+To receive completed candle data, it is important to send a timestamp that comes before the current minute. If you send a timestamp for the current minute, you will receive partial data because the minute is not yet finished. Therefore, it is recommended to always use a "range_to" timestamp of the previous minute to ensure that you receive the completed candle data.
+
+# Example:
+Current Time(seconds can be 1-59): 12:10:20 PM
+
+Input for history will be:
+
+a. range_from: 12:08:00 PM
+b. range_to: Current Time - 1 minute = 12:09:20 PM
+
+So you will get 2 candles - 12:08 PM and 12:09 PM candles. This example is for 1-minute candles; for other resolutions, you have to subtract the resolution time from "range_to" to get completed candles only.
+
+
+Limits for History
+a. Unlimited number of stocks history data can be downloaded in a day.
+b. Up to 100 days of data per request for resolutions of 1, 2, 3, 5, 10, 15, 20, 30, 45, 60, 120, 180, and 240 minutes. Data is available from July 3, 2017.
+c. For 1D, 1W and 1M resolutions up to 366 days of data per request for 1D (1 day), 1W (1 week) and 1M (1 month) resolutions.
+d. For Seconds Charts the history will be available only for 30-Trading Days
+
+
+################# Request Attribute
+
+Attribute        | Data Type | Description
+------------------------------------------------------------------------------------------------------------------------
+symbol*          | string    | Mandatory.
+                               Eg: NSE:SBIN-EQ
+
+resolution*      | string    | The candle resolution. Possible values are:
+                               Day       : "D" or "1D"
+                               5 seconds : "5S"
+                               10 seconds: "10S"
+                               15 seconds: "15S"
+                               30 seconds: "30S"
+                               45 seconds: "45S"
+                               1 minute  : "1"
+                               2 minute  : "2"
+                               3 minute  : "3"
+                               5 minute  : "5"
+                               10 minute : "10"
+                               15 minute : "15"
+                               20 minute : "20"
+                               30 minute : "30"
+                               60 minute : "60"
+                               120 minute: "120"
+                               240 minute: "240"
+                               1 week    : "1W"
+                               1 month   : "1M"
+
+date_format*     | int       | date_format is a boolean flag.
+                               0 to enter the epoch value.
+                               Eg: 670073472
+                               1 to enter the date format as yyyy-mm-dd.
+
+range_from*      | string    | Indicating the start date of records.
+                               Accepts epoch value if date_format flag is set to 0.
+                               Eg: range_from: 670073472
+
+                               Accepts yyyy-mm-dd format if date_format flag is set to 1.
+                               Eg: 2021-01-01
+
+range_to*        | string    | Indicating the end date of records.
+                               Accepts epoch value if date_format flag is set to 0.
+                               Eg: range_to: 1622028732
+
+                               Accepts yyyy-mm-dd format if date_format flag is set to 1.
+                               Eg: 2021-03-01
+
+cont_flag        | int       | Set cont flag 1 for continuous data and future options.
+
+oi_flag          | int       | Set flag to "1" enable OI as a part of candle.
+
+
+################# Request Attribute
+
+
+Attribute    | Data Type | Description
+------------------------------------------------------------------------------------------------
+s            | string    | ok / error
+
+candles      | array     | Candles data containing array of following data for particular time stamp:
+                           1. Current epoch time
+                           2. Open Value
+                           3. Highest Value
+                           4. Lowest Value
+                           5. Close Value
+                           6. Total traded quantity (volume)
+
+
+# The Node Code
+-----------------
+
+const FyersAPI = require("fyers-api-v3").fyersModel
+
+var fyers = new FyersAPI()
+fyers.setAppId("QCxxxx57-1xx")
+fyers.setRedirectUrl("https://url.xyz")
+fyers.setAccessToken("eyjb....")
+
+var inp={
+    "symbol":"NSE:SBIN-EQ",
+    "resolution":"D",
+    "date_format":"0",
+    "range_from":"1690895316",
+    "range_to":"1691068173",
+    "cont_flag":"1"
+}
+fyers.getHistory(inp).then((response)=>{
+    console.log(response)
+}).catch((err)=>{
+    console.log(err)
+})
+
+ ------------------------------------------------------------------------------------------------------------------------------------------
+ Sample Success Response 
+ ------------------------------------------------------------------------------------------------------------------------------------------
+ {
+ "s": "ok",
+     "candles": [
+     [
+         1622073600,
+         413.7,
+         429.1,
+         412.0,
+         425.2,
+         73392997
+     ]
+ ]
+ }

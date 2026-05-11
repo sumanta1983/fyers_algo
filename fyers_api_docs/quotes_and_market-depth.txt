@@ -1,0 +1,292 @@
+# Quotes
+The Quotes API retrieves the full market quotes for one or more symbols provided by the user.
+
+################## Request attributes
+
+Attribute	| Data Type	    | *Description
+symbols*	| string	    |   Maximum symbol limit is 50. Eg: NSE:SBIN-EQ.
+
+
+
+################## Response Attributes
+
+Attribute          | Data Type | Description
+--------------------------------------------------------------------------------------------------------
+s                  | string    | ok / error
+
+ch                 | float     | Change value
+
+chp                | float     | Percentage of change between the current value and the previous day's market close
+
+lp                 | float     | Last traded price
+
+spread             | float     | Difference between lowest asking and highest bidding price
+
+ask                | float     | Asking price for the symbol
+
+bid                | float     | Bidding price for the symbol
+
+open_price         | float     | Price at market opening time
+
+high_price         | float     | Highest price for the day
+
+low_price          | float     | Lowest price for the day
+
+prev_close_price   | float     | Previous closing price
+
+atp                | float     | Average traded price
+
+volume             | int       | Volume traded
+
+short_name         | string    | Short name for the symbol
+                                   Eg: "SBIN-EQ"
+
+exchange           | string    | Name of the exchange
+                                   Eg: "NSE" or "BSE"
+
+description        | string    | Description of the symbol
+
+original_name      | string    | Original name of the symbol name provided by the user
+
+symbol             | string    | Symbol name provided by the user
+
+fyToken            | string    | Unique token for each symbol
+
+tt                 | int       | Today's time
+
+cmd                | dict      | ---Deprecated---
+
+
+
+# the Node script
+------------------
+
+const FyersAPI = require("fyers-api-v3").fyersModel
+
+var fyers = new FyersAPI()
+fyers.setAppId("QCxxxx57-1xx")
+fyers.setRedirectUrl("https://url.xyz")
+fyers.setAccessToken("eyjb....")
+
+var inp=["NSE:SBIN-EQ","NSE:TCS-EQ"]
+
+fyers.getQuotes(inp).then((response) => {
+    console.log(response)
+}).catch((error) => {
+    console.log(error)
+})
+
+------------------------------------------------------------------------------------------------------------------------------------------
+Sample Success Response 
+------------------------------------------------------------------------------------------------------------------------------------------
+{
+"s": "ok",
+"code": 200,
+"d": [
+    {
+        "n": "NSE:ONGC-EQ",
+        "s": "ok",
+        "v": {
+            "ch": -0.35,
+            "chp": -0.28,
+            "lp": 123.6,
+            "spread": 0.05,
+            "ask": 123.65,
+            "bid": 123.6,
+            "open_price": 123.95,
+            "high_price": 126.6,
+            "low_price": 122.5,
+            "prev_close_price": 122.2,
+            "atp": 120.6
+            "volume": 14942959,
+            "short_name": "ONGC-EQ",
+            "exchange": "NSE",
+            "description": "NSE:ONGC-EQ",
+            "original_name": "NSE:ONGC-EQ",
+            "symbol": "NSE:ONGC-EQ",
+            "fyToken": "10100000003045",
+            "tt": "1623369600"
+        }
+    }
+   ]
+ }
+
+################################################
+##################################################
+##################################################
+
+Market Depth
+The Market Depth API returns the complete market data of the symbol provided. It will include the quantity, OHLC values, and Open Interest fields, and bid/ask prices.
+
+
+################## Request attributes
+
+Attribute	| Data Type	    | *Description
+symbols*	| string	    | Maximum symbol limit is 1. Eg: NSE:SBIN-EQ
+ohlcv_flag*	| int	        | Set the ohlcv_flag to 1 to get open, high, low, closing and volume quantity'
+
+
+################## Response Attributes
+
+Attribute        | Data Type | Description
+--------------------------------------------------------------------------------------------------------
+s                | string    | ok / error
+
+code             | int       | This is the code to identify specific responses
+
+totalbuyqty      | int       | Total buying quantity
+
+totalsellqty     | int       | Total selling quantity
+
+bids             | array     | Bidding price along with volume and total number of orders
+
+ask              | array     | Offer price with volume and total number of orders
+
+o                | float     | Price at market opening time
+
+h                | float     | Highest price for the day
+
+l                | float     | Lowest price for the day
+
+c                | float     | Price at the market closing
+
+chp              | float     | Percentage of change between the current value and the previous day's market close
+
+tick_size        | float     | Minimum price multiplier
+
+ch               | float     | Change value
+
+ltq              | int       | Last traded quantity
+
+ltt              | int       | Last traded time
+
+ltp              | float     | Last traded price
+
+v                | int       | Volume traded
+
+atp              | float     | Average traded price
+
+lower_ckt        | float     | Lower circuit price
+
+upper_ckt        | float     | Upper circuit price
+
+expiry           | string    | Expiry date
+
+oi               | float     | Open interest
+
+oiflag           | bool      | Boolean flag for OI data, true or false
+
+pdoi             | int       | Previous day open interest
+
+oipercent        | float     | Change in open interest percentage
+
+
+
+# the node script
+---------------------
+
+const FyersAPI = require("fyers-api-v3").fyersModel
+
+var fyers = new FyersAPI()
+fyers.setAppId("QCxxxx57-1xx")
+fyers.setRedirectUrl("https://url.xyz")
+fyers.setAccessToken("eyjb....")
+
+var inp={
+  "symbol":["NSE:SBIN-EQ"],
+  "ohlcv_flag":1
+}
+
+fyers.getMarketDepth(inp).then((response) => {
+    console.log(response)
+}).catch((error) => {
+    console.log(error)
+})
+
+
+------------------------------------------------------------------------------------------------------------------------------------------
+Sample Success Response 
+------------------------------------------------------------------------------------------------------------------------------------------
+{
+"s": "ok",
+"d": {
+    "NSE:SBIN-EQ": {
+        "totalbuyqty": 875917,
+        "totalsellqty": 1972756,
+        "bids": [
+            {
+                "price": 430.35,
+                "volume": 33,
+                "ord": 3
+            },
+            {
+                "price": 430.3,
+                "volume": 3000,
+                "ord": 2
+            },
+            {
+                "price": 430.25,
+                "volume": 15402,
+                "ord": 13
+            },
+            {
+                "price": 430.2,
+                "volume": 6795,
+                "ord": 14
+            },
+            {
+                "price": 430.15,
+                "volume": 7051,
+                "ord": 21
+            }
+        ],
+        "ask": [
+            {
+                "price": 430.45,
+                "volume": 3573,
+                "ord": 11
+            },
+            {
+                "price": 430.5,
+                "volume": 25871,
+                "ord": 70
+            },
+            {
+                "price": 430.55,
+                "volume": 5949,
+                "ord": 24
+            },
+            {
+                "price": 430.6,
+                "volume": 4970,
+                "ord": 31
+            },
+            {
+                "price": 430.65,
+                "volume": 8109,
+                "ord": 23
+            }
+        ],
+        "o": 432.0,
+        "h": 432.5,
+        "l": 427.45,
+        "c": 431.7,
+        "chp": -0.29,
+        "tick_Size": 0.05,
+        "ch": -1.25,
+        "ltq": 1,
+        "ltt": 1626429149,
+        "ltp": 430.45,
+        "v": 8393560,
+        "atp": 429.63,
+        "lower_ckt": 388.55,
+        "upper_ckt": 474.85,
+        "expiry": "",
+        "oi": 0,
+        "oiflag": false,
+        "pdoi": 0,
+        "oipercent": 0.0
+    }
+},
+"message": ""
+ }
